@@ -1,0 +1,270 @@
+<!doctype html>
+<html>
+  <head>
+    <title>CataBank | Transferir</title>
+    <!-- Bootstrap 5 -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Bootstrap Icons -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="d-flex">
+      <aside class="sidebar vh-100 p-3 d-flex flex-column">
+        <div class="mb-4">
+          <h5 class="fw-bold">CataBank</h5>
+          <small class="text-muted">Banco Virtual</small>
+        </div>
+
+        <nav class="flex-grow-1">
+          <a href="./menu.html"><i class="bi bi-house"></i> Menú</a>
+          <button class="btn border-0 px-3 py-2 w-100" id="btnDepositar">
+            <i class="bi bi-plus"></i> Depositar
+          </button>
+          <a class="active"><i class="bi bi-send"></i> Transferir</a>
+          <button class="btn border-0 px-3 py-2 w-100" id="btnMovimientos">
+            <i class="bi bi-arrow-left-right"></i> Movimientos
+          </button>
+          <a href="#"><i class="bi bi-people"></i> Contactos</a>
+          <a href="#"><i class="bi bi-gear"></i> Configuración</a>
+        </nav>
+        <div id="actionMessage" class="mt-3 text-center small"></div>
+        <a href="./index.html" class="text-danger"
+          ><i class="bi bi-box-arrow-right"></i> Cerrar Sesión</a
+        >
+      </aside>
+
+      <div class="flex-grow-1 p-4">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <h4 class="fw-semibold">Enviar dinero</h4>
+          <div class="d-flex align-items-center gap-3">
+            <i class="bi bi-bell"></i>
+            <div class="d-flex align-items-center gap-2">
+              <span class="small">Williams Hernández</span>
+              <i class="bi bi-person"></i>
+            </div>
+          </div>
+        </div>
+
+        <h2 class="fw-bold mb-1">Realizar transferencia</h2>
+        <p class="text-muted mb-4">Indica a quién deseas transferir hoy.</p>
+
+        <div class="container my-5" style="max-width: 900px">
+          <div class="card p-4 mb-4">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h6 class="mb-0 text-muted">Seleccionar contacto</h6>
+              <a href="#" class="text-primary small text-decoration-none"
+                >Ver todo</a
+              >
+            </div>
+            <form class="row">
+              <div class="mb-3 col-md-10">
+                <input
+                  type="text"
+                  class="form-control text-white border"
+                  placeholder="Buscar contacto"
+                />
+              </div>
+              <button
+                type="submit"
+                class="btn btn-secondary mb-3 col-md-2 py-0"
+              >
+                <i class="bi bi-search me-1"></i> Buscar
+              </button>
+            </form>
+
+            <div class="d-flex gap-4 align-items-center overflow-auto">
+              <div class="text-center">
+                <button
+                  class="btn btn-outline-primary rounded-circle mb-1"
+                  style="width: 56px; height: 56px"
+                  data-bs-toggle="modal"
+                  data-bs-target="#addContactModal"
+                >
+                  <i class="bi bi-plus-lg"></i>
+                </button>
+                <div class="small text-muted">Añadir</div>
+              </div>
+
+              <div class="text-center">
+                <img
+                  src="https://i.pravatar.cc/56?img=12"
+                  class="rounded-circle mb-1"
+                />
+                <div class="fw-semibold small text-muted">Alex Rivera</div>
+                <div class="text-muted small">Favorito</div>
+              </div>
+
+              <div class="text-center">
+                <img
+                  src="https://i.pravatar.cc/56?img=32"
+                  class="rounded-circle border border-3 border-primary mb-1"
+                />
+                <div class="fw-semibold small text-primary">Sarah Chen</div>
+                <div class="small text-primary">Seleccionado</div>
+              </div>
+
+              <div class="text-center">
+                <img
+                  src="https://i.pravatar.cc/56?img=45"
+                  class="rounded-circle mb-1"
+                />
+                <div class="fw-semibold small text-muted">Marcus Wright</div>
+                <div class="text-muted small">Reciente</div>
+              </div>
+
+              <div class="text-center">
+                <img
+                  src="https://i.pravatar.cc/56?img=47"
+                  class="rounded-circle mb-1"
+                />
+                <div class="fw-semibold small text-muted">Elena Gomez</div>
+                <div class="text-muted small">Favorito</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card p-4 mb-4 text-center">
+            <div class="text-uppercase text-muted small mb-2">
+              Monto a transferir
+            </div>
+
+            <div class="display-5 fw-bold mb-2 text-muted">
+              <span class="text-primary">$</span> 100.000
+            </div>
+
+            <div class="text-muted small mb-2">
+              • Límite de transferencia diaria: $5.000.000.
+            </div>
+            <div class="text-muted small mb-3">• Tu saldo actual: $500.000</div>
+
+            <div class="mb-3">
+              <input
+                class="form-control text-center"
+                placeholder="Nota (Opcional)"
+              />
+            </div>
+
+            <button class="btn btn-primary btn-lg w-100">
+              Realizar Transferencia <i class="bi bi-arrow-right ms-1"></i>
+            </button>
+
+            <div class="text-muted small mt-3">
+              <i class="bi bi-lock-fill me-1"></i>
+              Transacción segura con datos encriptados SSL.
+            </div>
+          </div>
+        </div>
+
+        <div class="modal fade" id="addContactModal" tabindex="-1">
+          <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content p-4 login-card">
+              <div class="modal-header border-0">
+                <h5 class="modal-title">Añadir nuevo contacto</h5>
+                <button class="btn-close" data-bs-dismiss="modal"></button>
+              </div>
+
+              <div class="modal-body">
+                <form>
+                  <div class="mb-3">
+                    <label class="form-label">Nombre del titular</label>
+                    <input
+                      type="text"
+                      class="form-control text-white border"
+                      placeholder="ej. Juan Perez"
+                    />
+                  </div>
+
+                  <div class="mb-3">
+                    <label class="form-label">RUT</label>
+                    <input
+                      type="text"
+                      class="form-control text-white border"
+                      placeholder="12.345.678-9"
+                    />
+                  </div>
+
+                  <div class="mb-3">
+                    <label class="form-label">Email</label>
+                    <input
+                      type="email"
+                      class="form-control text-white border"
+                      placeholder="contacto@email.com"
+                    />
+                  </div>
+
+                  <div class="mb-3">
+                    <label class="form-label">Alias</label>
+                    <input
+                      type="text"
+                      class="form-control text-white border"
+                      placeholder="ej. Vendedor de papas"
+                    />
+                  </div>
+
+                  <div class="mb-3">
+                    <label class="form-label">Banco</label>
+                    <select class="form-select text-white border">
+                      <option selected disabled>Seleccionar banco</option>
+                      <option>Banco de Chile</option>
+                      <option>BancoEstado</option>
+                      <option>Santander</option>
+                      <option>BCI</option>
+                    </select>
+                  </div>
+                  <script src="./src.js"></script>
+                  <div class="mb-3">
+                    <label class="form-label">Tipo de cuenta</label>
+                    <select class="form-select text-white border">
+                      <option selected disabled>Seleccionar</option>
+                      <option>Cuenta Corriente</option>
+                      <option>Cuenta Vista</option>
+                      <option>Cuenta de Ahorro</option>
+                    </select>
+                  </div>
+
+                  <div class="mb-4">
+                    <label class="form-label">Numero de cuenta</label>
+                    <input
+                      type="text"
+                      class="form-control text-white border"
+                      placeholder="ej. 192949402"
+                    />
+                  </div>
+
+                  <button type="submit" class="btn btn-primary w-100 mb-3">
+                    <i class="bi bi-person-plus me-1"></i> Añadir contacto
+                  </button>
+
+                  <div class="text-center">
+                    <a
+                      href="#"
+                      data-bs-dismiss="modal"
+                      class="text-decoration-none text-muted"
+                    >
+                      Cancelar
+                    </a>
+                  </div>
+
+                  <div class="text-center text-muted small mt-4">
+                    <i class="bi bi-lock-fill me-1"></i>
+                    Datos encriptados de extremo a extremo.
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./src.js"></script>
+  </body>
+</html>

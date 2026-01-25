@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CataBank | Dashboard</title>
+
+    <!-- Bootstrap 5 -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Bootstrap Icons -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="d-flex">
+      <aside class="sidebar vh-100 p-3 d-flex flex-column">
+        <div class="mb-4">
+          <h5 class="fw-bold">CataBank</h5>
+          <small class="text-muted">Banco Virtual</small>
+        </div>
+
+        <nav class="flex-grow-1">
+          <a class="active"><i class="bi bi-house"></i> Menú</a>
+          <button class="btn border-0 px-3 py-2 w-100" id="btnDepositar">
+            <i class="bi bi-plus"></i> Depositar
+          </button>
+          <button class="btn border-0 px-3 py-2 w-100" id="btnEnviar">
+            <i class="bi bi-send"></i> Transferir
+          </button>
+          <button class="btn border-0 px-3 py-2 w-100" id="btnMovimientos">
+            <i class="bi bi-arrow-left-right"></i> Movimientos
+          </button>
+          <a href="#"><i class="bi bi-people"></i> Contactos</a>
+          <a href="#"><i class="bi bi-gear"></i> Configuración</a>
+        </nav>
+        <div id="actionMessage" class="mt-3 text-center small"></div>
+
+        <a href="./index.html" class="text-danger">
+          <i class="bi bi-box-arrow-right"></i> Cerrar Sesión
+        </a>
+      </aside>
+
+      <div class="flex-grow-1 p-4">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <h4 class="fw-semibold">Dashboard</h4>
+          <div class="d-flex align-items-center gap-3">
+            <i class="bi bi-bell"></i>
+            <div class="d-flex align-items-center gap-2">
+              <span class="small">Williams Hernández</span>
+              <i class="bi bi-person"></i>
+            </div>
+          </div>
+        </div>
+
+        <h2 class="fw-bold mb-1">Bienvenido, Williams</h2>
+        <p class="text-muted mb-4">Aquí tienes un resumen de tu cuenta.</p>
+
+        <div class="row g-4 mb-4">
+          <div class="col-lg-8">
+            <div class="card border-1 rounded balance-card p-4 text-white">
+              <p class="mb-1">Monto total de la cuenta</p>
+              <h2 id="balance" class="fw-bold">$0</h2>
+              <div class="mt-3 d-flex gap-2">
+                <a href="./deposit.html" class="btn btn-light btn-sm">
+                  <i class="bi bi-plus"></i> Depositar
+                </a>
+                <a href="./sendmoney.html" class="btn btn-outline-light btn-sm">
+                  <i class="bi bi-send"></i> Transferir
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4">
+            <div class="card card-dark p-3 mb-3 border-1 border-rounded">
+              <small class="text-muted">Recibido este mes</small>
+              <h5 class="fw-bold text-muted">$350.000</h5>
+              <small class="text-success">+25%</small>
+            </div>
+            <div class="card card-dark p-3 border-1 border-rounded">
+              <small class="text-muted">Gastado este mes</small>
+              <h5 class="fw-bold text-muted">$50.000</h5>
+              <small class="text-danger">-10%</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="card card-dark p-4 border-1 border-rounded">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h5 class="fw-semibold text-muted">Últimos movimientos</h5>
+            <a href="./transactions.html" class="text-decoration-none"
+              >Ver todo</a
+            >
+          </div>
+
+          <div class="table-responsive">
+            <table class="table table-dark-custom">
+              <thead>
+                <tr>
+                  <th>Transacción</th>
+
+                  <th>Fecha</th>
+                  <th class="text-end">Monto</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Google play servicios</td>
+
+                  <td>Ene 24, 2026</td>
+                  <td class="text-end amount-negative">-$3.600</td>
+                </tr>
+                <tr>
+                  <td>Sence bono</td>
+
+                  <td>Ene 19, 2026</td>
+                  <td class="text-end amount-positive">+$150.000</td>
+                </tr>
+                <tr>
+                  <td>Farmacia</td>
+
+                  <td>Ene 14, 2026</td>
+                  <td class="text-end amount-negative">-$10.500</td>
+                </tr>
+                <tr>
+                  <td>Gimnasio</td>
+
+                  <td>Ene 4, 2026</td>
+                  <td class="text-end amount-negative">-$20.000</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./src.js"></script>
+  </body>
+</html>

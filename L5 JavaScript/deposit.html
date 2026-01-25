@@ -1,0 +1,446 @@
+<!doctype html>
+<html>
+  <head>
+    <title>CataBank | Depositar</title>
+    <!-- Bootstrap 5 -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Bootstrap Icons -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="d-flex">
+      <aside class="sidebar vh-100 p-3 d-flex flex-column">
+        <div class="mb-4">
+          <h5 class="fw-bold">CataBank</h5>
+          <small class="text-muted">Banco Virtual</small>
+        </div>
+
+        <nav class="flex-grow-1">
+          <a href="./menu.html"><i class="bi bi-house"></i> Menú</a>
+          <a class="active"><i class="bi bi-plus"></i> Depositar</a>
+
+          <button class="btn border-0 px-3 py-2 w-100" id="btnEnviar">
+            <i class="bi bi-send"></i> Transferir
+          </button>
+          <button class="btn border-0 px-3 py-2 w-100" id="btnMovimientos">
+            <i class="bi bi-arrow-left-right"></i> Movimientos
+          </button>
+
+          <a href="#"><i class="bi bi-people"></i> Contactos</a>
+          <a href="#"><i class="bi bi-gear"></i> Configuración</a>
+        </nav>
+        <div id="actionMessage" class="mt-3 text-center small"></div>
+        <a href="./index.html" class="text-danger"
+          ><i class="bi bi-box-arrow-right"></i> Cerrar Sesión</a
+        >
+      </aside>
+
+      <div class="flex-grow-1 p-4">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <h4 class="fw-semibold">Depositar</h4>
+          <div class="d-flex align-items-center gap-3">
+            <i class="bi bi-bell"></i>
+            <div class="d-flex align-items-center gap-2">
+              <span class="small">Williams Hernández</span>
+              <i class="bi bi-person"></i>
+            </div>
+          </div>
+        </div>
+
+        <h2 class="fw-bold mb-1">Ingresa dinero</h2>
+        <p class="text-muted mb-4">
+          Elige una forma de cargar dinero a tu cuenta
+        </p>
+
+        <div class="container py-3">
+          <ul class="nav nav-tabs mb-4 border-bottom border-1">
+            <li class="nav-item">
+              <button
+                class="nav-link active"
+                data-bs-toggle="tab"
+                data-bs-target="#debit"
+              >
+                Debito
+              </button>
+            </li>
+            <li class="nav-item">
+              <button
+                class="nav-link"
+                data-bs-toggle="tab"
+                data-bs-target="#credit"
+              >
+                Crédito
+              </button>
+            </li>
+            <li class="nav-item">
+              <button
+                class="nav-link"
+                data-bs-toggle="tab"
+                data-bs-target="#bank"
+              >
+                Transferencia
+              </button>
+            </li>
+          </ul>
+
+          <div class="tab-content">
+            <div class="tab-pane fade" id="bank">
+              <div class="card p-4">
+                <div
+                  class="d-flex justify-content-between align-items-center mb-3"
+                >
+                  <h4 class="mb-0 text-muted">
+                    Datos bancarios<button
+                      class="copy-btn px-3 bg-transparent border-0 text-muted"
+                    >
+                      <i class="bi bi-clipboard"></i>
+                    </button>
+                  </h4>
+                  <span class="badge bg-success bg-opacity-25 text-success"
+                    >ACTIVA
+                  </span>
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label text-secondary">TITULAR</label>
+                  <div class="input-group">
+                    <input
+                      type="text"
+                      class="form-control text-white"
+                      value="Williams Hernandez"
+                      readonly
+                    />
+                  </div>
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label text-secondary">CI</label>
+                  <div class="input-group">
+                    <input
+                      type="text"
+                      class="form-control text-white"
+                      value="12.123.456-7"
+                      readonly
+                    />
+                  </div>
+                </div>
+
+                <div class="mb-4">
+                  <label class="form-label text-secondary">N° DE CUENTA</label>
+                  <div class="input-group">
+                    <input
+                      type="text"
+                      class="form-control text-white"
+                      value="119284748"
+                      readonly
+                    />
+                  </div>
+                </div>
+                <div class="mb-4">
+                  <label class="form-label text-secondary"
+                    >TIPO DE CUENTA</label
+                  >
+                  <div class="input-group">
+                    <input
+                      type="text"
+                      class="form-control text-white"
+                      value="Cuenta Corriente"
+                      readonly
+                    />
+                  </div>
+                </div>
+
+                <div class="info-box rounded p-3 mb-4">
+                  <div class="d-flex">
+                    <i class="bi bi-info-circle text-primary me-2"></i>
+                    <small class="text-secondary">
+                      <strong class="text-light">Información importante</strong
+                      ><br />
+                      Las transferencias bancarias pueden tardar de 1 a 12 horas
+                      en verse reflejadas en su estado de cuenta.
+                    </small>
+                  </div>
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center">
+                  <small class="text-secondary">
+                    <i class="bi bi-shield-lock"></i> Datos encriptados de
+                    extremo a extremo.
+                  </small>
+                  <button class="btn btn-primary">
+                    He realizado la transferencia
+                    <i class="bi bi-check-circle"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="tab-pane fade show active" id="debit">
+              <div class="card p-4">
+                <div
+                  class="d-flex justify-content-between align-items-center mb-3"
+                >
+                  <h4 class="mb-4 text-muted">Tarjeta de Débito</h4>
+                  <button
+                    class="btn btn-outline-primary"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#addCard"
+                  >
+                    + Añadir Tarjeta
+                  </button>
+                </div>
+
+                <div class="mb-4">
+                  <form id="depositForm">
+                    <label class="form-label text-secondary"
+                      >SELECCIONAR TARJETA</label
+                    >
+                    <div class="row g-3">
+                      <div class="col-md-6">
+                        <div
+                          class="border rounded p-3 d-flex justify-content-between align-items-center"
+                        >
+                          <div>
+                            <strong class="text-muted">VISA</strong><br />
+                            <small class="text-secondary"
+                              >**** 4242 · 12/26</small
+                            >
+                          </div>
+                          <input
+                            type="radio"
+                            name="card"
+                            checked
+                            value="VISA **** 4242 · 12/26"
+                          />
+                        </div>
+                      </div>
+
+                      <div class="col-md-6">
+                        <div
+                          class="border rounded p-3 d-flex justify-content-between align-items-center"
+                        >
+                          <div>
+                            <strong class="text-muted">Mastercard</strong><br />
+                            <small class="text-secondary"
+                              >**** 1123 · 09/25</small
+                            >
+                          </div>
+                          <input
+                            type="radio"
+                            name="card"
+                            value="Mastercard **** 1123 · 09/25"
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    <label class="form-label text-secondary mt-3"
+                      >MONTO A DEPOSITAR</label
+                    >
+
+                    <div class="input-group input-group-lg mb-3">
+                      <span class="input-group-text">$</span>
+                      <input
+                        type="number"
+                        id="depositAmount"
+                        class="form-control text-white border"
+                        placeholder="10000"
+                      />
+                    </div>
+                    <small id="amountError" class="text-danger d-none">
+                      Ingresa un monto válido mayor a 0
+                    </small>
+                    <div class="d-flex justify-content-end">
+                      <button type="submit" class="btn btn-primary btn-lg">
+                        DEPOSITAR
+                      </button>
+                    </div>
+                  </form>
+                </div>
+                <!-- añadir tarjeta. Formulario -->
+                <!-- <div class="collapse mb-4" id="addCard">
+                  <div class="border rounded p-3">
+                    <h6 class="mb-3 text-muted">Datos nueva tarjeta</h6>
+
+                    <div class="row g-3">
+                      <div class="col-md-6">
+                        <input
+                          class="form-control text-white border"
+                          placeholder="Número de tarjeta"
+                        />
+                      </div>
+
+                      <div class="col-md-6">
+                        <input
+                          class="form-control text-white border"
+                          placeholder="Titular de Tarjeta"
+                        />
+                      </div>
+
+                      <div class="col-md-6">
+                        <input
+                          class="form-control text-white border"
+                          placeholder="MM / AA"
+                        />
+                      </div>
+
+                      <div class="col-md-6">
+                        <input
+                          class="form-control text-white border"
+                          placeholder="CVV"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div> -->
+                <!-- Formulario para depositar -->
+              </div>
+            </div>
+
+            <div class="tab-pane fade" id="credit">
+              <div class="card p-4">
+                <h4 class="mb-4 text-muted">Tarjeta de Crédito</h4>
+
+                <div class="mb-4">
+                  <label class="form-label text-secondary"
+                    >SELECCIONAR TARJETA</label
+                  >
+
+                  <div class="row g-3">
+                    <div class="col-md-6">
+                      <div
+                        class="border rounded p-3 d-flex justify-content-between align-items-center"
+                      >
+                        <div>
+                          <strong class="text-muted">VISA</strong><br />
+                          <small class="text-secondary"
+                            >**** 4242 · 12/26</small
+                          >
+                        </div>
+                        <input type="radio" name="card" checked />
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div
+                        class="border rounded p-3 d-flex justify-content-between align-items-center"
+                      >
+                        <div>
+                          <strong class="text-muted">Mastercard</strong><br />
+                          <small class="text-secondary"
+                            >**** 1123 · 09/25</small
+                          >
+                        </div>
+                        <input type="radio" name="card" />
+                      </div>
+                    </div>
+
+                    <div class="col-12">
+                      <button
+                        class="btn btn-outline-primary w-100"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#addCard"
+                      >
+                        + Añadir Tarjeta
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="collapse mb-4" id="addCard">
+                  <div class="border rounded p-3">
+                    <h6 class="mb-3 text-muted">Datos nueva tarjeta</h6>
+
+                    <div class="row g-3">
+                      <div class="col-md-6">
+                        <input
+                          class="form-control text-white border"
+                          placeholder="Número de tarjeta"
+                        />
+                      </div>
+
+                      <div class="col-md-6">
+                        <input
+                          class="form-control text-white border"
+                          placeholder="Titular de Tarjeta"
+                        />
+                      </div>
+
+                      <div class="col-md-6">
+                        <input
+                          class="form-control text-white border"
+                          placeholder="MM / AA"
+                        />
+                      </div>
+
+                      <div class="col-md-6">
+                        <input
+                          class="form-control text-white border"
+                          placeholder="CVV"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="mb-4">
+                  <label class="form-label text-secondary"
+                    >MONTO A DEPOSITAR</label
+                  >
+
+                  <div class="input-group input-group-lg mb-3">
+                    <span class="input-group-text">$</span>
+                    <input
+                      type="number"
+                      class="form-control text-white border"
+                      placeholder="10000"
+                    />
+                  </div>
+                </div>
+
+                <div class="d-flex justify-content-end">
+                  <button class="btn btn-primary btn-lg">DEPOSITAR</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="depositModal" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content bg-dark text-white">
+          <div class="modal-header">
+            <h5 class="modal-title">Depósito exitoso</h5>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div class="modal-body" id="depositModalMessage"></div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-bs-dismiss="modal"
+            >
+              OK
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./src.js"></script>
+  </body>
+</html>
