@@ -121,7 +121,15 @@ footer {
   background: #020617;
   border: 1px solid #1e293b;
 }
+#contactosSelect {
+  min-width: 0;
+}
 
+#contactsContainer {
+  flex: 1;
+  min-width: 0;
+  overflow-x: auto;
+}
 .contact-card {
   cursor: pointer;
   text-align: center;

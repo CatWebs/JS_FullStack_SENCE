@@ -1,6 +1,8 @@
 <!doctype html>
 <html>
   <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>CataBank | Depositar</title>
     <!-- Bootstrap 5 -->
     <link
@@ -111,7 +113,7 @@
           Elige una forma de cargar dinero a tu cuenta
         </p>
 
-        <div class="container py-3">
+        <div class="py-3">
           <ul class="nav nav-tabs mb-4 border-bottom border-1">
             <li class="nav-item">
               <button
@@ -210,7 +212,7 @@
                 </div>
 
                 <div class="info-box rounded p-3 mb-4">
-                  <div class="d-flex">
+                  <div class="d-flex mb-2">
                     <i class="bi bi-info-circle text-primary me-2"></i>
                     <small class="text-secondary">
                       <strong class="text-light">Información importante</strong
@@ -219,13 +221,15 @@
                       en verse reflejadas en su estado de cuenta.
                     </small>
                   </div>
-                </div>
-
-                <div class="d-flex justify-content-between align-items-center">
                   <small class="text-secondary">
-                    <i class="bi bi-shield-lock"></i> Datos encriptados de
+                    <i class="bi bi-shield-lock me-2"></i> Datos encriptados de
                     extremo a extremo.
                   </small>
+                </div>
+
+                <div
+                  class="d-flex flex-column justify-content-between align-items-center flex-sm-row"
+                >
                   <button class="btn btn-primary">
                     He realizado la transferencia
                     <i class="bi bi-check-circle"></i>

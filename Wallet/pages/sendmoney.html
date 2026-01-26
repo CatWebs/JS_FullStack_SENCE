@@ -1,6 +1,8 @@
 <!doctype html>
 <html>
   <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>CataBank | Transferir</title>
     <!-- Bootstrap 5 -->
     <link
@@ -31,9 +33,10 @@
 
       <div class="offcanvas-body d-flex flex-column">
         <small class="text-muted mb-3">Banco Virtual</small>
-
         <nav class="flex-grow-1">
-          <a href="./menu.html"><i class="bi bi-house"></i> Menú</a>
+          <a href="./menu.html" class="d-block mb-2"
+            ><i class="bi bi-house"></i> Menú</a
+          >
           <button
             class="btn border-0 px-3 py-2 w-100 text-start"
             id="btnDepositarMobile"
@@ -83,7 +86,7 @@
         </a>
       </aside>
 
-      <div class="flex-grow-1 p-4">
+      <main class="flex-grow-1 p-4">
         <div
           id="navbar-aux"
           class="d-flex justify-content-between align-items-center mb-4 gap-2"
@@ -108,17 +111,17 @@
         <h2 class="fw-bold mb-1">Realizar transferencia</h2>
         <p class="text-muted mb-4">Indica a quién deseas transferir hoy.</p>
 
-        <div class="container my-5" style="max-width: 900px">
-          <div class="card p-4 mb-4">
-            <div class="d-flex justify-content-between align-items-center mb-3">
+        <div class="py-3">
+          <div class="container-sm card p-4 mb-4 rounded-5">
+            <div class="d-flex justify-content-between align-items-center mb-2">
               <h6 class="mb-0 text-muted">Seleccionar contacto</h6>
               <a href="#" class="text-primary small text-decoration-none"
                 >Ver todo</a
               >
             </div>
             <!-- Buscar contactos: Sin uso aún-->
-            <form id="searchContactForm" class="row">
-              <div class="mb-3 col-md-10">
+            <form id="searchContactForm" class="row align-items-center">
+              <div class="mb-1 col-md-10 col-sm-12">
                 <input
                   type="text"
                   class="form-control text-white border"
@@ -127,7 +130,7 @@
               </div>
               <button
                 type="submit"
-                class="btn btn-secondary mb-3 col-md-2 py-0"
+                class="btn btn-secondary mb-3 col-md-2 col-sm-12"
               >
                 <i class="bi bi-search me-1"></i> Buscar
               </button>
@@ -151,18 +154,18 @@
                 </div>
                 <div
                   id="contactsContainer"
-                  class="d-flex gap-3 overflow-hidden"
+                  class="d-flex gap-2 flex-grow-1"
                 ></div>
               </div>
 
-              <div id="ingresarMonto" class="mb-3">
+              <div id="ingresarMonto" class="py-3">
                 <label class="form-label text-uppercase text-muted small mb-2"
                   >Monto a transferir</label
                 >
                 <div
                   class="d-flex fw-bold mb-1 text-muted justify-content-center"
                 >
-                  <span class="text-primary pe-3 display-5">$</span>
+                  <span class="text-primary pe-2 fs-2">$</span>
                   <input
                     type="number"
                     id="montoTransferencia"
@@ -177,7 +180,10 @@
                 </div>
                 <div class="text-muted small text-center">
                   • Tu saldo actual:
-                  <p class="d-inline-block fw-bolder my-0" id="balance"></p>
+                  <p
+                    class="d-inline-block fw-bolder my-0 text-success"
+                    id="balance"
+                  ></p>
                 </div>
                 <small id="amountErrorTransferencia" class="text-danger d-none">
                   Monto ingresado no es válido
@@ -207,124 +213,124 @@
             </form>
           </div>
         </div>
+      </main>
+    </div>
+    <!--Modales-->
+    <div class="modal fade" id="addContactModal" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content p-4 login-card">
+          <div class="modal-header border-0">
+            <h5 class="modal-title">Añadir nuevo contacto</h5>
+            <button class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
 
-        <div class="modal fade" id="addContactModal" tabindex="-1">
-          <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content p-4 login-card">
-              <div class="modal-header border-0">
-                <h5 class="modal-title">Añadir nuevo contacto</h5>
-                <button class="btn-close" data-bs-dismiss="modal"></button>
+          <div class="modal-body">
+            <form id="addContactForm">
+              <div class="mb-3">
+                <label class="form-label">Nombre del titular</label>
+                <input
+                  id="contactName"
+                  type="text"
+                  class="form-control text-white border"
+                  placeholder="ej. Juan Perez"
+                  required
+                />
+                <span
+                  id="errorAddContact"
+                  class="d-none text-danger small mt-1 d-block"
+                >
+                  El usuario ya existe
+                </span>
               </div>
 
-              <div class="modal-body">
-                <form id="addContactForm">
-                  <div class="mb-3">
-                    <label class="form-label">Nombre del titular</label>
-                    <input
-                      id="contactName"
-                      type="text"
-                      class="form-control text-white border"
-                      placeholder="ej. Juan Perez"
-                      required
-                    />
-                    <span
-                      id="errorAddContact"
-                      class="d-none text-danger small mt-1 d-block"
-                    >
-                      El usuario ya existe
-                    </span>
-                  </div>
-
-                  <div class="mb-3">
-                    <label class="form-label">RUT</label>
-                    <input
-                      type="text"
-                      class="form-control text-white border"
-                      placeholder="12.345.678-9"
-                      required
-                    />
-                  </div>
-
-                  <div class="mb-3">
-                    <label class="form-label">Email</label>
-                    <input
-                      type="email"
-                      class="form-control text-white border"
-                      placeholder="contacto@email.com"
-                      required
-                    />
-                  </div>
-
-                  <div class="mb-3">
-                    <label class="form-label">Alias</label>
-                    <input
-                      type="text"
-                      class="form-control text-white border"
-                      placeholder="ej. Vendedor de papas"
-                    />
-                  </div>
-
-                  <div class="mb-3">
-                    <label class="form-label">Banco</label>
-                    <select class="form-select text-white border">
-                      <option selected disabled>Seleccionar banco</option>
-                      <option>Banco de Chile</option>
-                      <option>BancoEstado</option>
-                      <option>Santander</option>
-                      <option>BCI</option>
-                    </select>
-                  </div>
-
-                  <div class="mb-3">
-                    <label class="form-label">Tipo de cuenta</label>
-                    <select class="form-select text-white border">
-                      <option selected disabled>Seleccionar</option>
-                      <option>Cuenta Corriente</option>
-                      <option>Cuenta Vista</option>
-                      <option>Cuenta de Ahorro</option>
-                    </select>
-                  </div>
-
-                  <div class="mb-4">
-                    <label class="form-label">Numero de cuenta</label>
-                    <input
-                      type="text"
-                      class="form-control text-white border"
-                      placeholder="ej. 192949402"
-                      required
-                    />
-                  </div>
-
-                  <button
-                    type="submit"
-                    id="addContactBtn"
-                    class="btn btn-primary w-100 mb-3"
-                  >
-                    <i class="bi bi-person-plus me-1"></i> Añadir contacto
-                  </button>
-
-                  <div class="text-center">
-                    <a
-                      href="#"
-                      data-bs-dismiss="modal"
-                      class="text-decoration-none text-muted"
-                    >
-                      Cancelar
-                    </a>
-                  </div>
-
-                  <div class="text-center text-muted small mt-4">
-                    <i class="bi bi-lock-fill me-1"></i>
-                    Datos encriptados de extremo a extremo.
-                  </div>
-                </form>
+              <div class="mb-3">
+                <label class="form-label">RUT</label>
+                <input
+                  type="text"
+                  class="form-control text-white border"
+                  placeholder="12.345.678-9"
+                  required
+                />
               </div>
-            </div>
+
+              <div class="mb-3">
+                <label class="form-label">Email</label>
+                <input
+                  type="email"
+                  class="form-control text-white border"
+                  placeholder="contacto@email.com"
+                  required
+                />
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label">Alias</label>
+                <input
+                  type="text"
+                  class="form-control text-white border"
+                  placeholder="ej. Vendedor de papas"
+                />
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label">Banco</label>
+                <select class="form-select text-white border">
+                  <option selected disabled>Seleccionar banco</option>
+                  <option>Banco de Chile</option>
+                  <option>BancoEstado</option>
+                  <option>Santander</option>
+                  <option>BCI</option>
+                </select>
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label">Tipo de cuenta</label>
+                <select class="form-select text-white border">
+                  <option selected disabled>Seleccionar</option>
+                  <option>Cuenta Corriente</option>
+                  <option>Cuenta Vista</option>
+                  <option>Cuenta de Ahorro</option>
+                </select>
+              </div>
+
+              <div class="mb-4">
+                <label class="form-label">Numero de cuenta</label>
+                <input
+                  type="text"
+                  class="form-control text-white border"
+                  placeholder="ej. 192949402"
+                  required
+                />
+              </div>
+
+              <button
+                type="submit"
+                id="addContactBtn"
+                class="btn btn-primary w-100 mb-3"
+              >
+                <i class="bi bi-person-plus me-1"></i> Añadir contacto
+              </button>
+
+              <div class="text-center">
+                <a
+                  href="#"
+                  data-bs-dismiss="modal"
+                  class="text-decoration-none text-muted"
+                >
+                  Cancelar
+                </a>
+              </div>
+
+              <div class="text-center text-muted small mt-4">
+                <i class="bi bi-lock-fill me-1"></i>
+                Datos encriptados de extremo a extremo.
+              </div>
+            </form>
           </div>
         </div>
       </div>
     </div>
-    <div class="modal fade" id="transferModal" tabindex="-1">
+    <div class="modal fade" id="transferModal" tabindex="-2">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content bg-dark text-white">
           <div class="modal-header">
