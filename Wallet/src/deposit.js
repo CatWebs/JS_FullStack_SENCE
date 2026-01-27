@@ -30,6 +30,7 @@ if (formDeposit) {
     localStorage.setItem("saldo", saldo);
     saveMovimiento({
       detalle: `Depósito (${selectedCard.value})`,
+      tipo: "Abono",
       fecha: new Date().toLocaleDateString("es-CL", {
         month: "short",
         day: "numeric",

@@ -37,6 +37,7 @@ if (transferForm) {
     localStorage.setItem("saldo", saldo);
     saveMovimiento({
       detalle: `Transferencia a ${contactSelected.value}`,
+      tipo: "Transferencia",
       fecha: new Date().toLocaleDateString("es-CL", {
         month: "short",
         day: "numeric",
