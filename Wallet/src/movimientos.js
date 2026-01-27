@@ -76,35 +76,10 @@ function renderUltimosMovimientos() {
 
     tbody.appendChild(tr);
   }
-
-  // movimientosRecientes.forEach((mov, index) => {
-  //   if (index <= limite) {
-  //     const clase = mov.simbolo === "+" ? "text-success" : "text-danger";
-
-  //     const tr = document.createElement("tr");
-
-  //     tr.innerHTML = `
-  //     <td>${mov.detalle}</td>
-  //     <td>${mov.tipo}</td>
-  //     <td>${mov.fecha}</td>
-  //     <td class="text-end ${clase}">
-  //       ${mov.simbolo}$${mov.monto.toLocaleString("es-CL")}
-  //     </td>
-  //   `;
-
-  //     tbody.appendChild(tr);
-  //   }
-  // });
 }
 
-function renderMovimientos() {
-  const tbody = document.getElementById("movimientos-body");
-  if (!tbody) return;
-
-  const movimientos = getMovimientos();
-  tbody.innerHTML = "";
-
-  movimientos.forEach((mov) => {
+function tablaMovimientos(movimiento, tbody) {
+  movimiento.forEach((mov) => {
     const clase = mov.simbolo === "+" ? "text-success" : "text-danger";
 
     const tr = document.createElement("tr");
@@ -121,3 +96,21 @@ function renderMovimientos() {
     tbody.appendChild(tr);
   });
 }
+
+function renderMovimientos() {
+  const tbody = document.getElementById("movimientos-body");
+  if (!tbody) return;
+  const movimientos = getMovimientos();
+  tbody.innerHTML = "";
+  const tipo = document.getElementById("filtroTipo").value;
+
+  if (tipo === "Todos") {
+    tablaMovimientos(movimientos, tbody);
+  } else {
+    const movFiltrados = movimientos.filter((mov) => mov.tipo === tipo);
+    tablaMovimientos(movFiltrados, tbody);
+  }
+}
+
+const selectMovimientos = document.getElementById("filtroTipo");
+selectMovimientos.addEventListener("change", renderMovimientos);

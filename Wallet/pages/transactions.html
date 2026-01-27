@@ -162,17 +162,14 @@
               </div>
 
               <div class="col-md-6 d-flex justify-content-md-end gap-2">
-                <select class="form-select w-auto text-white border">
-                  <option>Últimos 30 días</option>
-                  <option>Último mes</option>
-                  <option>Últimos 3 meses</option>
-                  <option>Personalizar</option>
-                </select>
-
-                <select class="form-select w-auto text-white border">
-                  <option>Tipo</option>
-                  <option>Cargo</option>
-                  <option>Abono</option>
+                <select
+                  id="filtroTipo"
+                  class="form-select w-auto text-white border"
+                >
+                  <option value="Todos" selected>Tipo</option>
+                  <option value="Cargo">Cargo</option>
+                  <option value="Abono">Abono</option>
+                  <option value="Transferencia">Transferencia</option>
                 </select>
               </div>
             </form>
