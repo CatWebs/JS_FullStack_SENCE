@@ -25,7 +25,8 @@ const CONTACTOS_INICIALES = [
 if (!localStorage.getItem("contactos")) {
   localStorage.setItem("contactos", JSON.stringify(CONTACTOS_INICIALES));
 }
-const contactos = JSON.parse(localStorage.getItem("contactos")) || [];
+let contactos = JSON.parse(localStorage.getItem("contactos")) || [];
+
 document.addEventListener("DOMContentLoaded", () => {
   renderContacts(contactos);
 });
@@ -33,14 +34,19 @@ document.addEventListener("DOMContentLoaded", () => {
 const contactsContainer = document.getElementById("contactsContainer");
 const inputBuscar = document.getElementById("buscador");
 
-inputBuscar.addEventListener("keyup", (e) => {
+inputBuscar.addEventListener("input", (e) => {
   const texto = e.target.value.toLowerCase().trim();
 
-  const contactosFiltrados = contactos.filter((contacto) =>
-    contacto.nombre.toLowerCase().includes(texto),
+  if (texto === "") {
+    renderContacts(contactos);
+    return;
+  }
+
+  const filtrados = contactos.filter((c) =>
+    c.nombre.toLowerCase().includes(texto),
   );
 
-  renderContacts(contactosFiltrados);
+  renderContacts(filtrados);
 });
 
 // Render de contactos -> recibe una lista de contactos sean filtrados o todos
@@ -66,7 +72,7 @@ function renderContacts(listaContactos) {
             type="radio"
             name="contacto"
             value="${contacto.nombre}"
-            ${index === 0 ? "required" : ""}
+            required
           />
         </label>
         <div class="fw-semibold small text-muted">${contacto.nombre}</div>
@@ -80,7 +86,6 @@ function renderContacts(listaContactos) {
 
 const addContactForm = document.getElementById("addContactForm");
 const nameInput = document.getElementById("contactName");
-const addBtn = document.getElementById("addContactBtn");
 const errorAddContact = document.getElementById("errorAddContact");
 
 if (addContactForm) {
@@ -90,7 +95,7 @@ if (addContactForm) {
     const nombre = nameInput.value.trim();
     if (!nombre) return;
 
-    const contactos = JSON.parse(localStorage.getItem("contactos")) || [];
+    contactos = JSON.parse(localStorage.getItem("contactos")) || [];
 
     const existe = contactos.some(
       (c) => c.nombre.toLowerCase() === nombre.toLowerCase(),
@@ -110,6 +115,10 @@ if (addContactForm) {
       tipo: "Nuevo",
       avatar: "https://i.pravatar.cc/56?img=2",
     });
+
+    localStorage.setItem("contactos", JSON.stringify(contactos));
+    contactos = JSON.parse(localStorage.getItem("contactos"));
+    renderContacts(contactos);
     const toastLiveExample = document.getElementById("usuarioAgregadoAlerta");
     const textoToast = document.getElementById("nombreNuevoUsuarioAñadido");
     const toastBootstrap =
@@ -120,7 +129,6 @@ if (addContactForm) {
         Ahora <strong>${nombre}</strong> es tu contacto.
       </p>
     `;
-    localStorage.setItem("contactos", JSON.stringify(contactos));
 
     const modal = bootstrap.Modal.getInstance(
       document.getElementById("addContactModal"),
@@ -128,6 +136,11 @@ if (addContactForm) {
     modal.hide();
 
     addContactForm.reset();
-    renderContacts(contactos);
   });
 }
+
+document.addEventListener("resetContactsView", () => {
+  inputBuscar.value = "";
+  contactos = JSON.parse(localStorage.getItem("contactos")) || [];
+  renderContacts(contactos);
+});

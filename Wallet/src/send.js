@@ -59,6 +59,8 @@ if (transferForm) {
     modal.show();
 
     amountTransfer.value = "";
+    transferForm.reset();
+    document.dispatchEvent(new Event("resetContactsView"));
     renderBalance();
   });
 }
