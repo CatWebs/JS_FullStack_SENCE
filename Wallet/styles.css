@@ -121,37 +121,6 @@ footer {
   background: #020617;
   border: 1px solid #1e293b;
 }
-#contactosSelect {
-  min-width: 0;
-}
-
-#contactsContainer {
-  flex: 1;
-  min-width: 0;
-  overflow-x: auto;
-}
-.contact-card {
-  cursor: pointer;
-  text-align: center;
-  color: white;
-}
-
-.contact-card input {
-  display: none;
-}
-
-.contact-card img {
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  border: 2px solid transparent;
-  transition: 0.2s;
-}
-
-.contact-card input:checked + img {
-  border-color: #0d6efd;
-  box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.4);
-}
 
 @media (max-width: 767px) {
   .hero-image {

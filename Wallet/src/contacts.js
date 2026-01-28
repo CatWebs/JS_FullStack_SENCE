@@ -1,5 +1,3 @@
-// CONTACTOS - STORAGE
-
 const CONTACTOS_INICIALES = [
   {
     nombre: "Alex Rivera",
@@ -23,48 +21,60 @@ const CONTACTOS_INICIALES = [
   },
 ];
 
-// Inicializar contactos
+// Inicializar contactos localstorage
 if (!localStorage.getItem("contactos")) {
   localStorage.setItem("contactos", JSON.stringify(CONTACTOS_INICIALES));
 }
-
-// RENDER CONTACTOS
-
+const contactos = JSON.parse(localStorage.getItem("contactos")) || [];
+document.addEventListener("DOMContentLoaded", () => {
+  renderContacts(contactos);
+});
+//Buscador de contactos
 const contactsContainer = document.getElementById("contactsContainer");
+const inputBuscar = document.getElementById("buscador");
 
-function renderContacts() {
+inputBuscar.addEventListener("keyup", (e) => {
+  const texto = e.target.value.toLowerCase().trim();
+
+  const contactosFiltrados = contactos.filter((contacto) =>
+    contacto.nombre.toLowerCase().includes(texto),
+  );
+
+  renderContacts(contactosFiltrados);
+});
+
+// Render de contactos -> recibe una lista de contactos sean filtrados o todos
+function renderContacts(listaContactos) {
   if (!contactsContainer) return;
 
-  const contactos = JSON.parse(localStorage.getItem("contactos")) || [];
   contactsContainer.innerHTML = "";
 
-  contactos.forEach((contacto, index) => {
+  if (listaContactos.length === 0) {
+    contactsContainer.innerHTML = `
+      <div class="text-danger small">No se encontraron contactos</div>
+    `;
+    return;
+  }
+
+  listaContactos.forEach((contacto, index) => {
     contactsContainer.insertAdjacentHTML(
       "beforeend",
       `
-      <div class="text-center">
-        <label class="contact-card">
+      <div class="text-center col-sm-6 d-flex align-items-center mb-2">
+        <label class="contact-card me-2">
           <input
             type="radio"
             name="contacto"
             value="${contacto.nombre}"
             ${index === 0 ? "required" : ""}
           />
-          <img
-            src="${contacto.avatar}"
-            class="rounded-circle mb-1"
-            alt="${contacto.nombre}"
-          />
         </label>
         <div class="fw-semibold small text-muted">${contacto.nombre}</div>
-        <div class="text-muted small">${contacto.tipo}</div>
       </div>
-    `,
+      `,
     );
   });
 }
-
-document.addEventListener("DOMContentLoaded", renderContacts);
 
 // AÑADIR CONTACTO
 
@@ -100,10 +110,17 @@ if (addContactForm) {
       tipo: "Nuevo",
       avatar: "https://i.pravatar.cc/56?img=2",
     });
-
+    const toastLiveExample = document.getElementById("usuarioAgregadoAlerta");
+    const textoToast = document.getElementById("nombreNuevoUsuarioAñadido");
+    const toastBootstrap =
+      bootstrap.Toast.getOrCreateInstance(toastLiveExample);
+    toastBootstrap.show();
+    textoToast.innerHTML = `
+      <p>
+        Ahora <strong>${nombre}</strong> es tu contacto.
+      </p>
+    `;
     localStorage.setItem("contactos", JSON.stringify(contactos));
-
-    renderContacts();
 
     const modal = bootstrap.Modal.getInstance(
       document.getElementById("addContactModal"),
@@ -111,5 +128,6 @@ if (addContactForm) {
     modal.hide();
 
     addContactForm.reset();
+    renderContacts(contactos);
   });
 }
