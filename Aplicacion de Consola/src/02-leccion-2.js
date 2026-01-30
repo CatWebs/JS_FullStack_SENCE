@@ -16,6 +16,13 @@ alert(
 
 let num1 = parseInt(prompt("Ingresa el primer número: "));
 let num2 = parseInt(prompt("Ingresa el segundo número: "));
+if (num1 > num2) {
+  console.log("El primer número ingresado es mayor que el segundo número");
+} else if (num1 > num2) {
+  console.log("El segundo número ingresado es mayor que el primer número");
+} else {
+  console.log("Los número son iguales");
+}
 
 let resultado = 0;
 let operacion = parseInt(
@@ -37,6 +44,8 @@ switch (operacion) {
   case 4:
     resultado = num1 / num2;
     break;
+  default:
+    alert("opción ingresada no válida");
 }
 
 alert("El resultado de la operación es: " + resultado);
