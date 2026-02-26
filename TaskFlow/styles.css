@@ -87,7 +87,8 @@ footer {
     background-color: var(--color-acento);
   }
 }
-.btn-filtro {
+.btn-filtro,
+.btn-cancel-modal {
   /*Botón para abrir un modal con filtros*/
   color: var(--color-texto-destacado);
   background-color: var(--bg-light);
@@ -112,10 +113,6 @@ footer {
 .tareas-completas {
   /*Sección de tareas hechas*/
   background-color: var(--bg-soft-dark);
-  .form-check-label {
-    text-decoration: line-through;
-    text-decoration-color: var(--color-primario);
-  }
 }
 
 .title-box {
@@ -154,8 +151,14 @@ footer {
   flex-grow: 1;
 }
 
+.form-check-label-ready {
+  text-decoration: line-through;
+  text-decoration-color: var(--color-primario);
+}
+
 .form-check-label {
   font-weight: 600;
+  color: var(--color-texto-destacado);
 }
 
 .form-check-input {
@@ -208,6 +211,16 @@ footer {
   letter-spacing: 1px;
   font-weight: 600;
   min-width: max-content;
+}
+
+.modal-title {
+  color: var(--color-texto-destacado);
+  font-weight: 700;
+}
+
+.form-control,
+.form-select {
+  border: 2px solid var(--borde);
 }
 
 @media (max-width: 767px) {

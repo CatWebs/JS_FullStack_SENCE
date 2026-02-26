@@ -79,11 +79,11 @@
             </label>
           </div>
           <div class="check-data">
+            <span class="span-date"><i class="bi bi-calendar"></i> Fecha</span>
             <span class="badge badge-prioridad badge-alta"
               >Prioridad<br />
               Alta</span
             >
-            <span class="span-date"><i class="bi bi-calendar"></i> Fecha</span>
           </div>
         </div>
         <div class="item-box">
@@ -94,11 +94,11 @@
             </label>
           </div>
           <div class="check-data">
+            <span class="span-date"><i class="bi bi-calendar"></i> Fecha</span>
             <span class="badge badge-prioridad badge-media"
               >Prioridad<br />
               media</span
             >
-            <span class="span-date"><i class="bi bi-calendar"></i> Fecha</span>
           </div>
         </div>
         <div class="item-box">
@@ -109,11 +109,11 @@
             </label>
           </div>
           <div class="check-data">
+            <span class="span-date"><i class="bi bi-calendar"></i> Fecha</span>
             <span class="badge badge-prioridad badge-baja"
               >Prioridad<br />
               baja</span
             >
-            <span class="span-date"><i class="bi bi-calendar"></i> Fecha</span>
           </div>
         </div>
       </div>
@@ -124,7 +124,7 @@
         <div class="item-box">
           <div class="form-check">
             <input class="form-check-input" type="checkbox" value="" id="" />
-            <label class="form-check-label" for="">
+            <label class="form-check-label form-check-label-ready" for="">
               Tarea número 1 a realizar
             </label>
           </div>
@@ -133,7 +133,7 @@
         <div class="item-box">
           <div class="form-check">
             <input class="form-check-input" type="checkbox" value="" id="" />
-            <label class="form-check-label" for="">
+            <label class="form-check-label form-check-label-ready" for="">
               Tarea número 2 a realizar
             </label>
           </div>
@@ -142,7 +142,7 @@
         <div class="item-box">
           <div class="form-check">
             <input class="form-check-input" type="checkbox" value="" id="" />
-            <label class="form-check-label" for="">
+            <label class="form-check-label form-check-label-ready" for="">
               Tarea número 3 a realizar
             </label>
           </div>
@@ -151,7 +151,7 @@
         <div class="item-box">
           <div class="form-check">
             <input class="form-check-input" type="checkbox" value="" id="" />
-            <label class="form-check-label" for="">
+            <label class="form-check-label form-check-label-ready" for="">
               Tarea número 4 a realizar
             </label>
           </div>
@@ -176,7 +176,7 @@
                 <input
                   id=""
                   type="text"
-                  class="form-control border"
+                  class="form-control"
                   placeholder="Descripción de la tarea"
                   required
                 />
@@ -184,7 +184,7 @@
 
               <div class="mb-3">
                 <label class="form-label">Prioridad de la tarea</label>
-                <select class="form-select border">
+                <select class="form-select">
                   <option selected disabled>Seleccionar</option>
                   <option>Prioridad alta</option>
                   <option>Prioridad baja</option>
@@ -192,22 +192,50 @@
                 </select>
               </div>
 
-              <!--Debo añadir campo para poner fecha límite. Campo Opcional-->
+              <div class="form-check form-switch mb-3">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  role="switch"
+                  id="switchCheckDate"
+                />
+                <label class="form-check-label" for="switchCheckDate"
+                  >Añadir fecha límite</label
+                >
+              </div>
 
-              <div class="d-flex justify-content-around align-items-center">
-                <button type="submit" id="" class="btn btn-agregar fw-bold">
+              <div class="mb-3">
+                <label class="form-label" for="fecha"
+                  >Fecha límite para realizar la tarea</label
+                >
+                <input
+                  class="form-control"
+                  type="date"
+                  id="fecha"
+                  name="fecha-tarea"
+                  value="2026-02-26"
+                  min="2026-02-26"
+                  max="2030-12-31"
+                />
+              </div>
+
+              <div
+                class="d-flex justify-content-around align-items-stretch gap-3"
+              >
+                <button
+                  type="submit"
+                  id=""
+                  class="btn btn-agregar fw-bold w-50"
+                >
                   + Agregar tarea
                 </button>
 
-                <div class="text-center">
-                  <a
-                    href="#"
-                    data-bs-dismiss="modal"
-                    class="text-decoration-none text-muted"
-                  >
-                    Cancelar
-                  </a>
-                </div>
+                <button
+                  data-bs-dismiss="modal"
+                  class="btn btn-cancel-modal fw-bold w-50"
+                >
+                  Cancelar
+                </button>
               </div>
             </form>
           </div>
