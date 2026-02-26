@@ -37,9 +37,11 @@
     </header>
     <main class="container pt-5">
       <span class="badge badge-title rounded-pill p-2">WORKSPACE</span>
-      <div class="d-flex justify-content-between">
+      <div
+        class="d-flex justify-content-md-between flex-column flex-md-row justify-content-end align-items-md-center mb-2 mb-md-4"
+      >
         <h1 class="inter-title">Gestión de tareas</h1>
-        <div>
+        <div class="action-buttons ms-auto mt-4 mt-md-0">
           <button type="button" class="btn mb-1 btn-filtro fw-bold">
             <!-- Próxima funcionalidad: Abrir un Modal con filtros. Las tareas serán filtradas por prioridad -->
             <i class="bi bi-filter"></i> Filtrar
@@ -55,7 +57,11 @@
           </button>
         </div>
       </div>
-      <div class="d-flex flex-column box tareas-incompletas my-5">
+
+      <div
+        class="d-flex flex-column box tareas-incompletas mb-5"
+        id="task-container"
+      >
         <div class="title-box">
           <h2>
             <i class="bi bi-list-task me-1"></i> Tareas activas

@@ -98,12 +98,46 @@ footer {
   }
 }
 
+.box {
+  /*Estilo de secciones*/
+  border: 2px solid var(--borde);
+  border-radius: 20px;
+  margin: 0;
+}
+.tareas-incompletas {
+  /*Sección de tareas activas*/
+  background-color: var(--bg-light);
+}
+
+.tareas-completas {
+  /*Sección de tareas hechas*/
+  background-color: var(--bg-soft-dark);
+  .form-check-label {
+    text-decoration: line-through;
+    text-decoration-color: var(--color-primario);
+  }
+}
+
+.title-box {
+  /*Titulo para tareas no realizadas*/
+  background-color: var(--bg-soft2);
+  padding: 1rem 3rem;
+  border-radius: inherit;
+}
+
 .badge-task {
   /*Badge que muestra la cantidad de tareas pendientes. Valor numérico*/
   background-color: var(--color-primario-light);
   color: var(--color-acento);
   font-size: 14px;
   margin-left: 12px;
+}
+
+.title-box-checked {
+  /*Titulo tareas realizadas*/
+  padding: 1rem 3rem;
+  border-radius: inherit;
+  color: var(--color-texto-destacado);
 }
 
 .item-box {
@@ -116,18 +150,12 @@ footer {
   align-items: center;
 }
 
-.title-box-checked {
-  /*Titulo tareas realizadas*/
-  padding: 1rem 3rem;
-  border-radius: inherit;
-  color: var(--color-texto-destacado);
+.form-check {
+  flex-grow: 1;
 }
 
-.title-box {
-  /*Titulo para tareas no realizadas*/
-  background-color: var(--bg-soft2);
-  padding: 1rem 3rem;
-  border-radius: inherit;
+.form-check-label {
+  font-weight: 600;
 }
 
 .form-check-input {
@@ -143,39 +171,17 @@ footer {
   border-color: var(--color-primario);
 }
 
-.form-check-label {
-  font-weight: 600;
-}
-
-.box {
-  /*Estilo de secciones*/
-  border: 2px solid var(--borde);
-  border-radius: 20px;
-  margin: 0;
-}
-
-.tareas-incompletas {
-  /*Sección de tareas activas*/
-  background-color: var(--bg-light);
-}
-
-.tareas-completas {
-  /*Sección de tareas hechas*/
-  background-color: var(--bg-soft-dark);
-  .form-check-label {
-    text-decoration: line-through;
-    text-decoration-color: var(--color-primario);
-  }
-}
 .check-data {
   display: flex;
   gap: 20px;
   flex-direction: row;
-  flex-wrap: wrap;
+  flex-wrap: no-wrap;
   justify-content: end;
   align-items: center;
   align-content: center;
+  width: max-content;
 }
+
 .badge-prioridad {
   text-transform: uppercase;
 }
@@ -201,4 +207,18 @@ footer {
   text-transform: uppercase;
   letter-spacing: 1px;
   font-weight: 600;
+  min-width: max-content;
+}
+
+@media (max-width: 767px) {
+  .item-box {
+    flex-direction: column;
+    align-items: start;
+    gap: 12px;
+  }
+
+  .check-data,
+  .span-date {
+    margin-left: 1.5rem;
+  }
 }
