@@ -1,0 +1,204 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+.inter-title {
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+}
+
+:root {
+  --color-primario: #f7822e;
+  --color-acento: #ea580c;
+  --color-primario-light: #fae1cf;
+  --color-secundario: #fff6c4;
+  --color-acento-secundario: #9e7f2b;
+  --color-texto-destacado: #166534;
+  --color-texto-destacado-secundario: #33ac61;
+  --bg-soft: #f0fdf4;
+  --bg-soft2: #f8fffa;
+  --bg-soft-dark: #e6fded;
+  --borde: #dcfce7;
+  --subtitulos: #d9ffd4;
+  --bg-light: #fdfffc;
+  --badge: #b9fcd3;
+}
+
+body {
+  min-height: 100vh;
+  background: var(--bg-soft);
+  color: #000;
+  font-family: "Inter", sans-serif;
+}
+
+h1,
+h2 {
+  color: var(--color-texto-destacado);
+}
+
+h2 {
+  font-size: 24px;
+  font-weight: 600;
+  i {
+    color: var(--color-acento);
+  }
+}
+
+h3 {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+footer {
+  font-size: 0.8rem;
+  color: var(--color-texto-destacado);
+  background-color: var(--bg-light);
+}
+
+.navbar {
+  background: var(--bg-light);
+}
+
+.navbar-brand,
+.nav-link {
+  color: var(--color-texto-destacado);
+  padding: 0;
+  &:hover,
+  &:focus {
+    color: var(--color-primario);
+  }
+}
+
+.nav-link.active {
+  color: var(--color-primario) !important;
+  border-bottom-color: var(--color-primario) !important;
+}
+
+.badge-title {
+  background-color: var(--badge);
+  border: 1px solid var(--borde);
+  color: var(--color-texto-destacado);
+}
+
+.btn-agregar {
+  color: var(--bg-light);
+  background-color: var(--color-primario);
+  border: 1px solid var(--color-acento);
+  &:hover {
+    background-color: var(--color-acento);
+  }
+}
+.btn-filtro {
+  /*Botón para abrir un modal con filtros*/
+  color: var(--color-texto-destacado);
+  background-color: var(--bg-light);
+  border: 1px solid var(--color-texto-destacado);
+  &:hover {
+    background-color: var(--color-texto-destacado);
+    color: var(--bg-light);
+  }
+}
+
+.badge-task {
+  /*Badge que muestra la cantidad de tareas pendientes. Valor numérico*/
+  background-color: var(--color-primario-light);
+  color: var(--color-acento);
+  font-size: 14px;
+  margin-left: 12px;
+}
+
+.item-box {
+  /*Card horizontal para cada tarea, ya sea realizada o por realizar*/
+  padding: 1rem 3rem;
+  color: var(--color-texto-destacado);
+  border-top: 1px solid var(--subtitulos);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title-box-checked {
+  /*Titulo tareas realizadas*/
+  padding: 1rem 3rem;
+  border-radius: inherit;
+  color: var(--color-texto-destacado);
+}
+
+.title-box {
+  /*Titulo para tareas no realizadas*/
+  background-color: var(--bg-soft2);
+  padding: 1rem 3rem;
+  border-radius: inherit;
+}
+
+.form-check-input {
+  /*Input tareas activas*/
+  background-color: var(--bg-soft2);
+  border-color: var(--badge);
+}
+
+.form-check-input:checked {
+  /*Input tareas hechas*/
+  background-color: var(--color-acento);
+  color: var(--bg-light);
+  border-color: var(--color-primario);
+}
+
+.form-check-label {
+  font-weight: 600;
+}
+
+.box {
+  /*Estilo de secciones*/
+  border: 2px solid var(--borde);
+  border-radius: 20px;
+  margin: 0;
+}
+
+.tareas-incompletas {
+  /*Sección de tareas activas*/
+  background-color: var(--bg-light);
+}
+
+.tareas-completas {
+  /*Sección de tareas hechas*/
+  background-color: var(--bg-soft-dark);
+  .form-check-label {
+    text-decoration: line-through;
+    text-decoration-color: var(--color-primario);
+  }
+}
+.check-data {
+  display: flex;
+  gap: 20px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: end;
+  align-items: center;
+  align-content: center;
+}
+.badge-prioridad {
+  text-transform: uppercase;
+}
+
+.badge-alta {
+  background-color: var(--color-primario-light);
+  color: var(--color-acento);
+}
+
+.badge-media {
+  background-color: var(--color-secundario);
+  color: var(--color-acento-secundario);
+}
+
+.badge-baja {
+  background-color: var(--subtitulos);
+  color: var(--color-texto-destacado-secundario);
+}
+
+.span-date {
+  color: var(--color-texto-destacado-secundario);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
+}

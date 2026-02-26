@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TaskFlow</title>
+
+    <!-- Bootstrap 5 -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Bootstrap Icons -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="navbar container-fluid">
+      <div class="container py-2">
+        <a class="navbar-brand fw-semibold" href="./index.html">
+          <i class="bi bi-clipboard2-check-fill me-1"></i> TaskFlow
+        </a>
+        <ul class="nav nav-underline">
+          <li class="nav-item">
+            <a href="./index.html" class="nav-link active" aria-current="page"
+              >Inicio</a
+            >
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">Consumo API</a>
+          </li>
+        </ul>
+      </div>
+    </header>
+    <main class="container pt-5">
+      <span class="badge badge-title rounded-pill p-2">WORKSPACE</span>
+      <div class="d-flex justify-content-between">
+        <h1 class="inter-title">Gestión de tareas</h1>
+        <div>
+          <button type="button" class="btn mb-1 btn-filtro fw-bold">
+            <!-- Próxima funcionalidad: Abrir un Modal con filtros. Las tareas serán filtradas por prioridad -->
+            <i class="bi bi-filter"></i> Filtrar
+          </button>
+          <button
+            type="button"
+            class="btn mb-1 btn-agregar fw-bold"
+            data-bs-toggle="modal"
+            data-bs-target="#addTask"
+          >
+            <!-- Próxima funcionalidad: Abrir un Modal con formulario para añadir tareas -->
+            + Agregar tarea
+          </button>
+        </div>
+      </div>
+      <div class="d-flex flex-column box tareas-incompletas my-5">
+        <div class="title-box">
+          <h2>
+            <i class="bi bi-list-task me-1"></i> Tareas activas
+            <span class="badge badge-task rounded-circle">4</span>
+          </h2>
+        </div>
+        <div class="item-box">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="" />
+            <label class="form-check-label" for="">
+              Tarea número 1 a realizar con una descripción demasiado pero
+              demasiado pero demasiado pero demasiado pero demasiado pero
+              demasiado pero demasiado pero demasiado pero demasiado pero
+              demasiado pero demasiado pero demasiado larga
+            </label>
+          </div>
+          <div class="check-data">
+            <span class="badge badge-prioridad badge-alta"
+              >Prioridad<br />
+              Alta</span
+            >
+            <span class="span-date"><i class="bi bi-calendar"></i> Fecha</span>
+          </div>
+        </div>
+        <div class="item-box">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="" />
+            <label class="form-check-label" for="">
+              Tarea número 2 a realizar
+            </label>
+          </div>
+          <div class="check-data">
+            <span class="badge badge-prioridad badge-media"
+              >Prioridad<br />
+              media</span
+            >
+            <span class="span-date"><i class="bi bi-calendar"></i> Fecha</span>
+          </div>
+        </div>
+        <div class="item-box">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="" />
+            <label class="form-check-label" for="">
+              Tarea número 3 a realizar
+            </label>
+          </div>
+          <div class="check-data">
+            <span class="badge badge-prioridad badge-baja"
+              >Prioridad<br />
+              baja</span
+            >
+            <span class="span-date"><i class="bi bi-calendar"></i> Fecha</span>
+          </div>
+        </div>
+      </div>
+      <div class="d-flex flex-column box tareas-completas mb-5">
+        <div class="title-box-checked">
+          <h3><i class="bi bi-check-all"></i> Tareas realizadas</h3>
+        </div>
+        <div class="item-box">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="" />
+            <label class="form-check-label" for="">
+              Tarea número 1 a realizar
+            </label>
+          </div>
+          <span class="span-date">COMPLETADO</span>
+        </div>
+        <div class="item-box">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="" />
+            <label class="form-check-label" for="">
+              Tarea número 2 a realizar
+            </label>
+          </div>
+          <span class="span-date">COMPLETADO</span>
+        </div>
+        <div class="item-box">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="" />
+            <label class="form-check-label" for="">
+              Tarea número 3 a realizar
+            </label>
+          </div>
+          <span class="span-date">COMPLETADO</span>
+        </div>
+        <div class="item-box">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="" />
+            <label class="form-check-label" for="">
+              Tarea número 4 a realizar
+            </label>
+          </div>
+          <span class="span-date">COMPLETADO</span>
+        </div>
+      </div>
+    </main>
+
+    <footer class="text-center py-3 mb-0">© 2026 Catalina TaskFlow</footer>
+
+    <div class="modal fade" id="addTask" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered modal-md">
+        <div class="modal-content">
+          <div class="modal-header border-0">
+            <h5 class="modal-title">Agregar tarea</h5>
+            <button class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+            <form id="">
+              <div class="mb-3">
+                <label class="form-label">Descripción de la tarea</label>
+                <input
+                  id=""
+                  type="text"
+                  class="form-control border"
+                  placeholder="Descripción de la tarea"
+                  required
+                />
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label">Prioridad de la tarea</label>
+                <select class="form-select border">
+                  <option selected disabled>Seleccionar</option>
+                  <option>Prioridad alta</option>
+                  <option>Prioridad baja</option>
+                  <option>Prioridad media</option>
+                </select>
+              </div>
+
+              <!--Debo añadir campo para poner fecha límite. Campo Opcional-->
+
+              <div class="d-flex justify-content-around align-items-center">
+                <button type="submit" id="" class="btn btn-agregar fw-bold">
+                  + Agregar tarea
+                </button>
+
+                <div class="text-center">
+                  <a
+                    href="#"
+                    data-bs-dismiss="modal"
+                    class="text-decoration-none text-muted"
+                  >
+                    Cancelar
+                  </a>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
