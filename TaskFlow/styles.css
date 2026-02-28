@@ -21,13 +21,25 @@
   --subtitulos: #d9ffd4;
   --bg-light: #fdfffc;
   --badge: #b9fcd3;
+  --danger: #c90808;
+}
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
 
 body {
-  min-height: 100vh;
+  min-height: 100dvh;
   background: var(--bg-soft);
   color: #000;
   font-family: "Inter", sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex-grow: 1;
 }
 
 h1,
@@ -88,17 +100,24 @@ footer {
   }
 }
 .btn-filtro,
-.btn-cancel-modal {
+.btn-cancel-modal,
+.btn-task {
   /*Botón para abrir un modal con filtros*/
   color: var(--color-texto-destacado);
   background-color: var(--bg-light);
   border: 1px solid var(--color-texto-destacado);
-  &:hover {
+  &:hover,
+  &:focus {
     background-color: var(--color-texto-destacado);
     color: var(--bg-light);
   }
 }
 
+.btn-delete:hover,
+.btn-delete:focus {
+  background-color: var(--danger);
+  color: var(--bg-light);
+}
 .box {
   /*Estilo de secciones*/
   border: 2px solid var(--borde);
@@ -130,16 +149,18 @@ footer {
   margin-left: 12px;
 }
 
-.title-box-checked {
+.title-box-complete {
   /*Titulo tareas realizadas*/
   padding: 1rem 3rem;
   border-radius: inherit;
   color: var(--color-texto-destacado);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.item-box {
+.item-box-complete {
   /*Card horizontal para cada tarea, ya sea realizada o por realizar*/
-  padding: 1rem 3rem;
   color: var(--color-texto-destacado);
   border-top: 1px solid var(--subtitulos);
   display: flex;
@@ -151,14 +172,15 @@ footer {
   flex-grow: 1;
 }
 
-.form-check-label-ready {
-  text-decoration: line-through;
+.form-check-label-complete {
+  text-decoration: line-through 2px;
   text-decoration-color: var(--color-primario);
 }
 
 .form-check-label {
   font-weight: 600;
   color: var(--color-texto-destacado);
+  font-size: 0.9rem;
 }
 
 .form-check-input {
@@ -174,19 +196,10 @@ footer {
   border-color: var(--color-primario);
 }
 
-.check-data {
-  display: flex;
-  gap: 20px;
-  flex-direction: row;
-  flex-wrap: no-wrap;
-  justify-content: end;
-  align-items: center;
-  align-content: center;
-  width: max-content;
-}
-
 .badge-prioridad {
   text-transform: uppercase;
+  font-size: 10px;
+  margin-right: 10px;
 }
 
 .badge-alta {
@@ -213,6 +226,18 @@ footer {
   min-width: max-content;
 }
 
+.span-complete {
+  background-color: var(--bg-light);
+  border: 1px solid var(--borde);
+  color: var(--color-texto-destacado-secundario);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 25px;
+}
+
 .modal-title {
   color: var(--color-texto-destacado);
   font-weight: 700;
@@ -223,15 +248,35 @@ footer {
   border: 2px solid var(--borde);
 }
 
-@media (max-width: 767px) {
-  .item-box {
-    flex-direction: column;
-    align-items: start;
-    gap: 12px;
-  }
+.item-box {
+  color: var(--color-texto-destacado);
+  border-top: 1px solid var(--subtitulos);
+}
 
-  .check-data,
-  .span-date {
-    margin-left: 1.5rem;
+.task-data {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  justify-content: center;
+  align-items: flex-start;
+  margin-right: 12px;
+}
+
+.task-input {
+  display: flex;
+}
+
+.task-actions {
+  max-width: max-content;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+@media (min-width: 1200px) {
+  .task-actions {
+    flex-direction: row;
+    align-items: flex-start;
   }
 }
