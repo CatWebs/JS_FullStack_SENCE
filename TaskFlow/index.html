@@ -58,10 +58,7 @@
         </div>
       </div>
 
-      <div
-        class="d-flex flex-column box tareas-incompletas mb-5 container p-0"
-        id="task-container"
-      >
+      <div class="d-flex flex-column box tareas-incompletas mb-5 container p-0">
         <div class="title-box">
           <h2>
             <i class="bi bi-list-task me-1"></i> Tareas activas
@@ -69,79 +66,89 @@
           </h2>
         </div>
 
-        <div class="item-box">
-          <div class="row m-0 p-4">
-            <div class="col task-data">
-              <div class="task-input">
-                <input
-                  class="form-check-input me-2"
-                  type="checkbox"
-                  value=""
-                  id=""
-                />
-                <label class="form-check-label" for="">
-                  Tarea número 1 a realizar con una descripción demasiado pero
-                  demasiado pero demasiado pero demasiado pero demasiado pero
-                  demasiado pero demasiado pero demasiado pero demasiado pero
-                  demasiado pero demasiado pero demasiado larga
-                </label>
+        <div id="task-container">
+          <div class="item-box">
+            <div class="row m-0 p-4">
+              <div class="col task-data">
+                <div class="task-input">
+                  <input
+                    class="form-check-input me-2"
+                    type="checkbox"
+                    value=""
+                    id=""
+                  />
+                  <label class="form-check-label" for="">
+                    Tarea número 1 a realizar con una descripción demasiado pero
+                    demasiado pero demasiado pero demasiado pero demasiado pero
+                    demasiado pero demasiado pero demasiado pero demasiado pero
+                    demasiado pero demasiado pero demasiado larga
+                  </label>
+                </div>
+                <div class="task-info ms-4">
+                  <span class="badge badge-prioridad badge-alta"
+                    >Prioridad Alta</span
+                  >
+                  <span class="span-date"
+                    ><i class="bi bi-calendar"></i> 28/02/2026</span
+                  >
+                </div>
               </div>
-              <div class="task-info ms-4">
-                <span class="badge badge-prioridad badge-alta"
-                  >Prioridad Alta</span
+              <div class="col task-actions">
+                <button
+                  class="btn btn-task btn-edit"
+                  type="button"
+                  data-bs-placement="bottom"
+                  data-bs-title="Editar tarea"
+                  data-bs-toggle="modal"
+                  data-bs-target="#editTask"
                 >
-                <span class="span-date"
-                  ><i class="bi bi-calendar"></i> 28/02/2026</span
+                  <i class="bi bi-pen"></i>
+                </button>
+                <button
+                  class="btn btn-task btn-delete"
+                  onclick="deleteTask()"
+                  type="button"
+                  data-bs-toggle="tooltip"
+                  data-bs-placement="bottom"
+                  data-bs-title="Eliminar tarea"
                 >
+                  <i class="bi bi-trash"></i>
+                </button>
               </div>
-            </div>
-            <div class="col task-actions">
-              <button
-                class="btn btn-task btn-edit"
-                type="button"
-                data-bs-placement="bottom"
-                data-bs-title="Editar tarea"
-                data-bs-toggle="modal"
-                data-bs-target="#editTask"
-              >
-                <i class="bi bi-pen"></i>
-              </button>
-              <button
-                class="btn btn-task btn-delete"
-                onclick="deleteTask()"
-                type="button"
-                data-bs-toggle="tooltip"
-                data-bs-placement="bottom"
-                data-bs-title="Eliminar tarea"
-              >
-                <i class="bi bi-trash"></i>
-              </button>
             </div>
           </div>
         </div>
       </div>
-      <div
-        class="d-flex flex-column box tareas-completas mb-5"
-        id="task-complete-container"
-      >
+
+      <div class="d-flex flex-column box tareas-completas mb-5">
         <div class="title-box-complete">
-          <h3><i class="bi bi-check-all"></i> Tareas realizadas</h3><button
-                class="btn btn-task btn-delete"
-                type="button"
-                data-bs-toggle="tooltip"
-                data-bs-placement="bottom"
-                data-bs-title="Eliminar tareas"
-              >
-                <i class="bi bi-trash"></i>
+          <h3><i class="bi bi-check-all"></i> Tareas realizadas</h3>
+          <button
+            class="btn btn-task btn-delete"
+            type="button"
+            data-bs-toggle="tooltip"
+            data-bs-placement="bottom"
+            data-bs-title="Eliminar tareas"
+          >
+            <i class="bi bi-trash"></i>
+          </button>
         </div>
-        <div class="item-box-complete p-4">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="" checked/>
-            <label class="form-check-label form-check-label-complete" for="">
-              Tarea número 1 a realizar
-            </label>
+        <div id="task-complete-container">
+          <div class="item-box-complete p-4">
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value=""
+                id=""
+                checked
+              />
+              <label class="form-check-label form-check-label-complete" for="">
+                Tarea número 1 a realizar
+              </label>
+            </div>
+            <span class="span-complete">COMPLETADO</span>
           </div>
-          <span class="span-complete">COMPLETADO</span>
         </div>
       </div>
     </main>
@@ -172,9 +179,9 @@
                 <label class="form-label">Prioridad de la tarea</label>
                 <select class="form-select" id="priorityInput">
                   <option selected disabled>Seleccionar</option>
-                  <option>Prioridad alta</option>
-                  <option>Prioridad baja</option>
-                  <option>Prioridad media</option>
+                  <option value="1">Prioridad alta</option>
+                  <option value="2">Prioridad media</option>
+                  <option value="3">Prioridad baja</option>
                 </select>
               </div>
 
@@ -210,7 +217,7 @@
               >
                 <button
                   type="submit"
-                  id=""
+                  data-bs-dismiss="modal"
                   class="btn btn-agregar fw-bold w-50"
                 >
                   + Agregar tarea
@@ -298,7 +305,8 @@
 
                 <button
                   data-bs-dismiss="modal"
-                  class="btn btn-cancel-modal fw-bold w-50" type="button"
+                  class="btn btn-cancel-modal fw-bold w-50"
+                  type="button"
                 >
                   Cancelar
                 </button>

@@ -1,9 +1,3 @@
-if (!localStorage.getItem("tasks")) {
-  localStorage.setItem("tasks", JSON.stringify(tasks));
-}
-
-let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-
 class Task {
   constructor(
     id,
@@ -59,6 +53,9 @@ const tarea3 = new Task(
   " 22/03/2026",
 );
 
-tasks.push(tarea1);
-tasks.push(tarea2);
-tasks.push(tarea3);
+let tasks = JSON.parse(localStorage.getItem("tasks"));
+
+if (!tasks) {
+  tasks = [tarea1, tarea2, tarea3];
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+}

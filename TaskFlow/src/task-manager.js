@@ -19,9 +19,7 @@ function renderPrioridad(prioridad) {
       clasePrioridad = "badge-baja";
       break;
   }
-  return `<span class="badge badge-prioridad ${clasePrioridad}"
-                  >${valorPrioridad}</span
-                >`;
+  return `<span class="badge badge-prioridad ${clasePrioridad}">${valorPrioridad}</span>`;
 }
 
 function renderFecha(requerido, fecha) {
@@ -54,6 +52,8 @@ function itemTemplate(item, id) {
               <button
                 class="btn btn-task btn-edit"
                 type="button"
+                id="edit${id}"
+                onclick="editTask(${id})"
                 data-bs-placement="bottom"
                 data-bs-title="Editar tarea"
                 data-bs-toggle="modal"
@@ -63,7 +63,8 @@ function itemTemplate(item, id) {
               </button>
               <button
                 class="btn btn-task btn-delete"
-                onclick="deleteTask()"
+                id="delete${id}"
+                onclick="deleteTask(${id})"
                 type="button"
                 data-bs-toggle="tooltip"
                 data-bs-placement="bottom"
@@ -88,13 +89,59 @@ function itemCompleteTemplate(item, id) {
         </div>`;
 }
 
-let taskContainer = document.getElementById("task-container");
-let taskCompleteContainer = document.getElementById("task-complete-container");
+function renderTasks() {
+  const taskContainer = document.getElementById("task-container");
+  const taskCompleteContainer = document.getElementById(
+    "task-complete-container",
+  );
 
-tasks.forEach((item, index) => {
-  if (!item.estado && item.fechaRealizada == undefined) {
-    taskContainer.innerHTML += itemTemplate(item, index);
+  taskContainer.innerHTML = "";
+  taskCompleteContainer.innerHTML = "";
+
+  tasks.forEach((item, index) => {
+    if (!item.estado && item.fechaRealizada == undefined) {
+      taskContainer.innerHTML += itemTemplate(item, index);
+    } else {
+      taskCompleteContainer.innerHTML += itemCompleteTemplate(item, index);
+    }
+  });
+}
+
+const fechaRequerida = document.getElementById("switchCheckDate");
+fechaRequerida.addEventListener("change", () => {
+  const dateInputContainer = document.getElementById("displayDateInput");
+  if (fechaRequerida.checked) {
+    dateInputContainer.classList.remove("d-none");
+    dateInputContainer.classList.add("d-block");
   } else {
-    taskCompleteContainer.innerHTML += itemCompleteTemplate(item, index);
+    dateInputContainer.classList.add("d-none");
+    dateInputContainer.classList.remove("d-block");
   }
+});
+
+addTaskForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const descripcion = document.getElementById("descriptionInput").value.trim();
+  let newID = tasks.length;
+  const prioridad = Number(document.getElementById("priorityInput").value);
+  const fechaLimite = document.getElementById("fecha").value.trim();
+  const fechaRequeridaInput =
+    document.getElementById("switchCheckDate").checked;
+  const task = new Task(
+    newID,
+    descripcion,
+    false,
+    prioridad,
+    fechaRequeridaInput,
+    fechaLimite,
+    undefined,
+  );
+  tasks.push(task);
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+  renderTasks();
+  addTaskForm.reset();
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  renderTasks();
 });
