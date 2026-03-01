@@ -122,6 +122,13 @@ function renderTasks() {
   }
 }
 
+function toggleDateVisibility(show) {
+  const container = document.getElementById("displayDateInput");
+  if (!container) return;
+
+  container.classList.toggle("d-none", !show);
+  container.classList.toggle("d-block", show);
+}
 function deleteTask(id) {
   Swal.fire({
     title: "Estas seguro de eliminar esta tarea?",
@@ -182,15 +189,10 @@ function editTask(id) {
   document.getElementById("priorityInput").value = task.prioridad;
   document.getElementById("switchCheckDate").checked = task.fechaRequerida;
 
-  const dateContainer = document.getElementById("displayDateInput");
+  toggleDateVisibility(task.fechaRequerida);
 
   if (task.fechaRequerida) {
-    dateContainer.classList.remove("d-none");
-    dateContainer.classList.add("d-block");
     document.getElementById("fecha").value = task.fechaLimite || "";
-  } else {
-    dateContainer.classList.add("d-none");
-    dateContainer.classList.remove("d-block");
   }
   const modal = new bootstrap.Modal(document.getElementById("addTask"));
   modal.show();
@@ -204,9 +206,7 @@ function resetTaskForm() {
 
   form.reset();
 
-  const dateContainer = document.getElementById("displayDateInput");
-  dateContainer.classList.add("d-none");
-  dateContainer.classList.remove("d-block");
+  toggleDateVisibility(false);
 
   tareaEnEdicion = null;
 

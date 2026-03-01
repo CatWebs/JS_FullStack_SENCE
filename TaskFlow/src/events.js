@@ -1,13 +1,6 @@
 const fechaRequerida = document.getElementById("switchCheckDate");
 fechaRequerida.addEventListener("change", () => {
-  const dateInputContainer = document.getElementById("displayDateInput");
-  if (fechaRequerida.checked) {
-    dateInputContainer.classList.remove("d-none");
-    dateInputContainer.classList.add("d-block");
-  } else {
-    dateInputContainer.classList.add("d-none");
-    dateInputContainer.classList.remove("d-block");
-  }
+  toggleDateVisibility(fechaRequerida.checked);
 });
 
 document
