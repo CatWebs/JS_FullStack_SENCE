@@ -100,16 +100,19 @@ function renderTasks() {
     "task-complete-container",
   );
 
-  taskContainer.innerHTML = "";
-  taskCompleteContainer.innerHTML = "";
+  let activeHTML = "";
+  let completeHTML = "";
 
   gestor.tasks.forEach((item) => {
     if (!item.estado) {
-      taskContainer.innerHTML += itemTemplate(item);
+      activeHTML += itemTemplate(item);
     } else {
-      taskCompleteContainer.innerHTML += itemCompleteTemplate(item);
+      completeHTML += itemCompleteTemplate(item);
     }
   });
+
+  taskContainer.innerHTML = activeHTML;
+  taskCompleteContainer.innerHTML = completeHTML;
 
   const activeTasks = document.querySelector(".badge-task");
   if (activeTasks) {
