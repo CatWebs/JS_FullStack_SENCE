@@ -98,19 +98,18 @@ function renderTasks() {
   taskContainer.innerHTML = "";
   taskCompleteContainer.innerHTML = "";
 
-  tasks.forEach((item, index) => {
-    if (!item.estado && item.fechaRealizada == undefined) {
-      taskContainer.innerHTML += itemTemplate(item, index);
+  tasks.forEach((item) => {
+    if (!item.estado) {
+      taskContainer.innerHTML += itemTemplate(item, item.id);
     } else {
-      taskCompleteContainer.innerHTML += itemCompleteTemplate(item, index);
+      taskCompleteContainer.innerHTML += itemCompleteTemplate(item, item.id);
     }
+    console.log(item);
   });
 
   const activeTasks = document.querySelector(".badge-task");
   if (activeTasks) {
-    activeTasks.textContent = tasks.filter(
-      (task) => !task.estado && task.fechaRealizada == undefined,
-    ).length;
+    activeTasks.textContent = tasks.filter((task) => !task.estado).length;
   }
 }
 
@@ -150,5 +149,20 @@ addTaskForm.addEventListener("submit", (e) => {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
+  renderTasks();
+});
+
+document.addEventListener("change", (e) => {
+  if (!e.target.classList.contains("task-check-status")) return;
+
+  const id = Number(e.target.id.replace("item", ""));
+  const checked = e.target.checked;
+
+  const task = tasks.find((t) => t.id === id);
+  if (!task) return;
+
+  task.toggleEstado(checked);
+
+  localStorage.setItem("tasks", JSON.stringify(tasks));
   renderTasks();
 });

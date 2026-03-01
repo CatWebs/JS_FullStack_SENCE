@@ -6,25 +6,30 @@ class Task {
     prioridad,
     fechaRequerida,
     fechaLimite,
-    fechaRealizada,
     fechaCreacion = new Date(),
+    fechaRealizada = undefined,
   ) {
     this.id = id;
     this.descripcion = descripcion;
     this.estado = estado;
-    this.prioridad = prioridad; // 1: Prioridad alta; 2: Prioridad media; 3: Prioridad baja;
+    this.prioridad = prioridad;
     this.fechaRequerida = fechaRequerida;
     this.fechaLimite = fechaLimite;
-    this.fechaRealizada = fechaRealizada;
     this.fechaCreacion = fechaCreacion;
+    this.fechaRealizada = fechaRealizada;
   }
-  obtenerFechaCreacion() {
-    return this.fechaCreacion.toLocaleString();
+  toggleEstado(nuevoEstado) {
+    this.estado = nuevoEstado;
+    if (nuevoEstado) {
+      this.fechaRealizada = new Date().toLocaleString();
+    } else {
+      this.fechaRealizada = undefined;
+    }
   }
 }
 
 const tarea1 = new Task(
-  undefined,
+  0,
   "Aplicar conceptos de POO para estructurar el código de la aplicación",
   false,
   1,
@@ -34,7 +39,7 @@ const tarea1 = new Task(
 );
 
 const tarea2 = new Task(
-  undefined,
+  1,
   "Aplicar nuevas funcionalidades de JavaScript ES6+",
   false,
   2,
@@ -44,7 +49,7 @@ const tarea2 = new Task(
 );
 
 const tarea3 = new Task(
-  undefined,
+  2,
   "Implementar eventos en la aplicación",
   true,
   3,
