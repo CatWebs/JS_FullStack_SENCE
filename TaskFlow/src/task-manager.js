@@ -120,6 +120,10 @@ function renderTasks() {
       (task) => !task.estado,
     ).length;
   }
+
+  document
+    .querySelectorAll('[data-bs-toggle="tooltip"]')
+    .forEach((el) => new bootstrap.Tooltip(el));
 }
 
 function toggleDateVisibility(show) {
