@@ -145,15 +145,13 @@ function deleteTask(id) {
     cancelButtonText: "Cancelar",
   }).then((result) => {
     if (!result.isConfirmed) return;
-    if (result.isConfirmed) {
-      gestor.eliminarTarea(id);
-      renderTasks();
-      Swal.fire({
-        title: "Eliminada!",
-        text: "La tarea ha sido eliminada de tus archivos.",
-        icon: "success",
-      });
-    }
+    gestor.eliminarTarea(id);
+    renderTasks();
+    Swal.fire({
+      title: "Eliminada!",
+      text: "La tarea ha sido eliminada de tus archivos.",
+      icon: "success",
+    });
   });
 }
 
@@ -169,7 +167,6 @@ function deleteAllTask() {
     cancelButtonText: "Cancelar",
   }).then((result) => {
     if (!result.isConfirmed) return;
-
     gestor.tasks = gestor.tasks.filter((task) => !task.estado);
     gestor.guardarEnLocalStorage();
     renderTasks();
