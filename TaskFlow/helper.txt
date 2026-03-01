@@ -1,0 +1,73 @@
+HTML de tareas de ejemplo para pruebas
+
+
+TAREA COMPLETA EJEMPLO
+
+ <!-- <div class="item-box-complete p-4">
+            <div class="form-check">
+              <input
+                class="form-check-input task-check-status"
+                type="checkbox"
+                value=""
+                id=""
+                checked
+              />
+              <label class="form-check-label form-check-label-complete" for="">
+                Tarea número 1 a realizar
+              </label>
+            </div>
+            <span class="span-complete">COMPLETADO</span>
+          </div> -->
+
+TAREA INCOMPLETA EJEMPLO
+
+ <!-- <div class="item-box">
+            <div class="row m-0 p-4">
+              <div class="col task-data">
+                <div class="task-input">
+                  <input
+                    class="form-check-input task-check-status me-2"
+                    type="checkbox"
+                    value=""
+                    id=""
+                  />
+                  <label class="form-check-label" for="">
+                    Tarea número 1 a realizar con una descripción demasiado pero
+                    demasiado pero demasiado pero demasiado pero demasiado pero
+                    demasiado pero demasiado pero demasiado pero demasiado pero
+                    demasiado pero demasiado pero demasiado larga
+                  </label>
+                </div>
+                <div class="task-info ms-4">
+                  <span class="badge badge-prioridad badge-alta"
+                    >Prioridad Alta</span
+                  >
+                  <span class="span-date"
+                    ><i class="bi bi-calendar"></i> 28/02/2026</span
+                  >
+                </div>
+              </div>
+              <div class="col task-actions">
+                <button
+                  class="btn btn-task btn-edit"
+                  type="button"
+                  data-bs-placement="bottom"
+                  data-bs-title="Editar tarea"
+                  data-bs-toggle="modal"
+                  data-bs-target="#editTask"
+                >
+                  <i class="bi bi-pen"></i>
+                </button>
+                <button
+                  class="btn btn-task btn-delete"
+                  onclick="deleteTask()"
+                  type="button"
+                  data-bs-toggle="tooltip"
+                  data-bs-placement="bottom"
+                  data-bs-title="Eliminar tarea"
+                >
+                  <i class="bi bi-trash"></i>
+                </button>
+              </div>
+            </div>
+          </div> -->
