@@ -34,7 +34,7 @@ function itemTemplate(item, id) {
             <div class="col task-data">
               <div class="task-input">
                 <input
-                  class="form-check-input me-2"
+                  class="form-check-input task-check-status me-2"
                   type="checkbox"
                   value="${item.estado}"
                   id="item${id}"
@@ -80,7 +80,7 @@ function itemTemplate(item, id) {
 function itemCompleteTemplate(item, id) {
   return `<div class="item-box-complete p-4">
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" value=${item.estado} id='item${id}' checked/>
+            <input class="form-check-input task-check-status" type="checkbox" value=${item.estado} id='item${id}' checked/>
             <label class="form-check-label form-check-label-complete" for='item${id}'>
               ${item.descripcion}
             </label>
@@ -105,6 +105,13 @@ function renderTasks() {
       taskCompleteContainer.innerHTML += itemCompleteTemplate(item, index);
     }
   });
+
+  const activeTasks = document.querySelector(".badge-task");
+  if (activeTasks) {
+    activeTasks.textContent = tasks.filter(
+      (task) => !task.estado && task.fechaRealizada == undefined,
+    ).length;
+  }
 }
 
 const fechaRequerida = document.getElementById("switchCheckDate");
