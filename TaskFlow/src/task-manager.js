@@ -36,8 +36,9 @@ function itemTemplate(item) {
                 <input
                   class="form-check-input task-check-status me-2"
                   type="checkbox"
-                  value="${item.estado}"
+                  ${item.estado ? "checked" : ""}
                   id="item${item.id}"
+                  onchange="toggleTask(${item.id}, this.checked)"
                 />
                 <label class="form-check-label" for="item${item.id}">
                   ${item.descripcion}
