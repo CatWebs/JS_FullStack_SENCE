@@ -81,7 +81,7 @@ function itemTemplate(item) {
 function itemCompleteTemplate(item) {
   return `<div class="item-box-complete p-4">
           <div class="form-check">
-            <input class="form-check-input task-check-status" type="checkbox" value=${item.estado} id='item${item.id}' checked/>
+            <input class="form-check-input task-check-status" type="checkbox" id='item${item.id}' checked/>
             <label class="form-check-label form-check-label-complete" for='item${item.id}'>
               ${item.descripcion}
             </label>
