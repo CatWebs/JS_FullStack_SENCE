@@ -141,3 +141,27 @@ function deleteTask(id) {
     }
   });
 }
+
+function deleteAllTask() {
+  Swal.fire({
+    title: "Estas seguro de eliminar todas las tareas realizadas?",
+    text: "Este proceso no se puede revertir!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#166534",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Sí, eliminar!",
+    cancelButtonText: "Cancelar",
+  }).then((result) => {
+    if (!result.isConfirmed) return;
+
+    gestor.tasks = gestor.tasks.filter((task) => !task.estado);
+    gestor.guardarEnLocalStorage();
+    renderTasks();
+    Swal.fire({
+      title: "Tareas eliminadas!",
+      text: "Se han eliminado todas las tareas realizadas con éxito.",
+      icon: "success",
+    });
+  });
+}
