@@ -90,6 +90,11 @@ function itemCompleteTemplate(item) {
         </div>`;
 }
 
+function toggleTask(id, estado) {
+  gestor.toggleEstadoTarea(id, estado);
+  renderTasks();
+}
+
 function renderTasks() {
   const taskContainer = document.getElementById("task-container");
   const taskCompleteContainer = document.getElementById(
@@ -99,17 +104,18 @@ function renderTasks() {
   taskContainer.innerHTML = "";
   taskCompleteContainer.innerHTML = "";
 
-  tasks.forEach((item) => {
+  gestor.tasks.forEach((item) => {
     if (!item.estado) {
       taskContainer.innerHTML += itemTemplate(item);
     } else {
       taskCompleteContainer.innerHTML += itemCompleteTemplate(item);
     }
-    console.log(item);
   });
 
   const activeTasks = document.querySelector(".badge-task");
   if (activeTasks) {
-    activeTasks.textContent = tasks.filter((task) => !task.estado).length;
+    activeTasks.textContent = gestor.tasks.filter(
+      (task) => !task.estado,
+    ).length;
   }
 }
