@@ -1,8 +1,3 @@
-const tooltipTriggerList = document.getElementsByClassName("btn-task");
-const tooltipList = [...tooltipTriggerList].map(
-  (tooltipTriggerEl) => new bootstrap.Tooltip(tooltipTriggerEl),
-);
-
 function deleteTask() {
   Swal.fire({
     title: "Estas seguro de eliminar esta tarea?",

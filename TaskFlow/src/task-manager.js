@@ -51,21 +51,18 @@ function itemTemplate(item) {
             </div>
             <div class="col task-actions">
               <button
-                class="btn btn-edit"
+                class="btn btn-edit btn-with-tooltip"
                 type="button"
                 id="edit${item.id}"
-                onclick="editTask(${item.id})"
                 data-bs-placement="bottom"
                 data-bs-title="Editar tarea"
-                data-bs-toggle="modal"
-                data-bs-target="#editTask"
+                data-bs-toggle="tooltip"
               >
                 <i class="bi bi-pen"></i>
               </button>
               <button
-                class="btn btn-delete"
+                class="btn btn-delete btn-with-tooltip"
                 id="delete${item.id}"
-                onclick="deleteTask(${item.id})"
                 type="button"
                 data-bs-toggle="tooltip"
                 data-bs-placement="bottom"
