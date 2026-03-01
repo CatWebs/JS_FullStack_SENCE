@@ -10,27 +10,52 @@ fechaRequerida.addEventListener("change", () => {
   }
 });
 
+document
+  .getElementById("addTask")
+  .addEventListener("hidden.bs.modal", resetTaskForm);
+
 const addTaskForm = document.getElementById("addTaskForm");
 addTaskForm.addEventListener("submit", (e) => {
   e.preventDefault();
+
   const descripcion = document.getElementById("descriptionInput").value.trim();
-  let newID = gestor.tasks.length;
   const prioridad = Number(document.getElementById("priorityInput").value);
   const fechaLimite = document.getElementById("fecha").value.trim();
   const fechaRequeridaInput =
     document.getElementById("switchCheckDate").checked;
-  const task = new Task(
-    newID,
-    descripcion,
-    false,
-    prioridad,
-    fechaRequeridaInput,
-    fechaLimite,
-    undefined,
-  );
-  gestor.agregarTarea(task);
+  if (tareaEnEdicion !== null) {
+    const task = gestor.obtenerTarea(tareaEnEdicion);
+    if (!task) return;
+
+    task.descripcion = descripcion;
+    task.prioridad = prioridad;
+    task.fechaRequerida = fechaRequeridaInput;
+    task.fechaLimite = fechaLimite;
+
+    gestor.guardarEnLocalStorage();
+
+    tareaEnEdicion = null;
+  } else {
+    let newID = gestor.tasks.length;
+    const task = new Task(
+      newID,
+      descripcion,
+      false,
+      prioridad,
+      fechaRequeridaInput,
+      fechaLimite,
+      undefined,
+    );
+    gestor.agregarTarea(task);
+  }
+
   renderTasks();
-  addTaskForm.reset();
+  document.querySelector("#addTask .modal-title").textContent = "Agregar tarea";
+
+  document.querySelector("#addTaskForm button[type='submit']").textContent =
+    "+ Agregar tarea";
+  const modal = bootstrap.Modal.getInstance(document.getElementById("addTask"));
+  modal.hide();
 });
 
 document.addEventListener("DOMContentLoaded", () => {

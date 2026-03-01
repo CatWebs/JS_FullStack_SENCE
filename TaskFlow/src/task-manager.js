@@ -57,6 +57,7 @@ function itemTemplate(item) {
                 data-bs-placement="bottom"
                 data-bs-title="Editar tarea"
                 data-bs-toggle="tooltip"
+                onclick="editTask(${item.id})"
               >
                 <i class="bi bi-pen"></i>
               </button>
@@ -164,4 +165,50 @@ function deleteAllTask() {
       icon: "success",
     });
   });
+}
+
+function editTask(id) {
+  const task = gestor.obtenerTarea(id);
+  if (!task) return;
+  tareaEnEdicion = id;
+  document.querySelector("#addTask .modal-title").textContent = "Editar tarea";
+  document.querySelector("#addTaskForm button[type='submit']").textContent =
+    "Guardar cambios";
+
+  document.getElementById("descriptionInput").value = task.descripcion;
+  document.getElementById("priorityInput").value = task.prioridad;
+  document.getElementById("switchCheckDate").checked = task.fechaRequerida;
+
+  const dateContainer = document.getElementById("displayDateInput");
+
+  if (task.fechaRequerida) {
+    dateContainer.classList.remove("d-none");
+    dateContainer.classList.add("d-block");
+    document.getElementById("fecha").value = task.fechaLimite || "";
+  } else {
+    dateContainer.classList.add("d-none");
+    dateContainer.classList.remove("d-block");
+  }
+  const modal = new bootstrap.Modal(document.getElementById("addTask"));
+  modal.show();
+}
+
+const addButton = document.getElementById("btnAddTask");
+addButton.onclick = () => (tareaEnEdicion = null);
+
+function resetTaskForm() {
+  const form = document.getElementById("addTaskForm");
+
+  form.reset();
+
+  const dateContainer = document.getElementById("displayDateInput");
+  dateContainer.classList.add("d-none");
+  dateContainer.classList.remove("d-block");
+
+  tareaEnEdicion = null;
+
+  document.querySelector("#addTask .modal-title").textContent = "Agregar tarea";
+
+  document.querySelector("#addTaskForm button[type='submit']").textContent =
+    "+ Agregar tarea";
 }

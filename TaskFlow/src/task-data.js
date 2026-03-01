@@ -102,7 +102,7 @@ if (gestor.tasks.length === 0) {
     false,
     2,
     true,
-    "25/03/2026",
+    "2026-03-25",
     undefined,
   );
 
@@ -112,11 +112,13 @@ if (gestor.tasks.length === 0) {
     true,
     3,
     true,
-    "25/03/2026",
-    "22/03/2026",
+    "2026-03-25",
+    "2026-03-22",
   );
 
   gestor.agregarTarea(tarea1);
   gestor.agregarTarea(tarea2);
   gestor.agregarTarea(tarea3);
 }
+
+let tareaEnEdicion = null;
