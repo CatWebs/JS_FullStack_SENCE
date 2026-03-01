@@ -67,6 +67,7 @@ function itemTemplate(item) {
                 data-bs-toggle="tooltip"
                 data-bs-placement="bottom"
                 data-bs-title="Eliminar tarea"
+                onclick="deleteTask(${item.id})"
               >
                 <i class="bi bi-trash"></i>
               </button>
@@ -115,4 +116,28 @@ function renderTasks() {
       (task) => !task.estado,
     ).length;
   }
+}
+
+function deleteTask(id) {
+  Swal.fire({
+    title: "Estas seguro de eliminar esta tarea?",
+    text: "Este proceso no se puede revertir!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#166534",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Sí, eliminar!",
+    cancelButtonText: "Cancelar",
+  }).then((result) => {
+    if (!result.isConfirmed) return;
+    if (result.isConfirmed) {
+      gestor.eliminarTarea(id);
+      renderTasks();
+      Swal.fire({
+        title: "Eliminada!",
+        text: "La tarea ha sido eliminada de tus archivos.",
+        icon: "success",
+      });
+    }
+  });
 }
