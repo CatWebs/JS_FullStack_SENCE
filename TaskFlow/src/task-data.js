@@ -109,7 +109,7 @@ if (gestor.tasks.length === 0) {
   const tarea3 = new Task(
     2,
     "Implementar eventos en la aplicación",
-    true,
+    false,
     3,
     true,
     "2026-03-25",
