@@ -28,39 +28,95 @@ class Task {
   }
 }
 
-const tarea1 = new Task(
-  0,
-  "Aplicar conceptos de POO para estructurar el código de la aplicación",
-  false,
-  1,
-  false,
-  undefined,
-  undefined,
-);
+//Creación del gestor de tareas
+class TaskManager {
+  constructor() {
+    this.tasks = [];
+    this.cargarDesdeLocalStorage();
+  }
 
-const tarea2 = new Task(
-  1,
-  "Aplicar nuevas funcionalidades de JavaScript ES6+",
-  false,
-  2,
-  true,
-  " 25/03/2026",
-  undefined,
-);
+  agregarTarea(task) {
+    this.tasks.push(task);
+    this.guardarEnLocalStorage();
+  }
 
-const tarea3 = new Task(
-  2,
-  "Implementar eventos en la aplicación",
-  true,
-  3,
-  true,
-  " 25/03/2026",
-  " 22/03/2026",
-);
+  eliminarTarea(id) {
+    this.tasks = this.tasks.filter((task) => task.id !== id);
+    this.guardarEnLocalStorage();
+  }
 
-let tasks = JSON.parse(localStorage.getItem("tasks"));
+  obtenerTarea(id) {
+    return this.tasks.find((task) => task.id === id);
+  }
 
-if (!tasks) {
-  tasks = [tarea1, tarea2, tarea3];
-  localStorage.setItem("tasks", JSON.stringify(tasks));
+  toggleEstadoTarea(id, nuevoEstado) {
+    const task = this.obtenerTarea(id);
+    if (task) {
+      task.toggleEstado(nuevoEstado);
+      this.guardarEnLocalStorage();
+    }
+  }
+
+  guardarEnLocalStorage() {
+    localStorage.setItem("tasks", JSON.stringify(this.tasks));
+  }
+
+  cargarDesdeLocalStorage() {
+    const data = JSON.parse(localStorage.getItem("tasks"));
+
+    if (data) {
+      this.tasks = data.map(
+        (t) =>
+          new Task(
+            t.id,
+            t.descripcion,
+            t.estado,
+            t.prioridad,
+            t.fechaRequerida,
+            t.fechaLimite,
+            t.fechaCreacion,
+            t.fechaRealizada,
+          ),
+      );
+    }
+  }
+}
+
+// Tareas iniciales
+const gestor = new TaskManager();
+
+if (gestor.tasks.length === 0) {
+  const tarea1 = new Task(
+    0,
+    "Aplicar conceptos de POO para estructurar el código de la aplicación",
+    false,
+    1,
+    false,
+    undefined,
+    undefined,
+  );
+
+  const tarea2 = new Task(
+    1,
+    "Aplicar nuevas funcionalidades de JavaScript ES6+",
+    false,
+    2,
+    true,
+    "25/03/2026",
+    undefined,
+  );
+
+  const tarea3 = new Task(
+    2,
+    "Implementar eventos en la aplicación",
+    true,
+    3,
+    true,
+    "25/03/2026",
+    "22/03/2026",
+  );
+
+  gestor.agregarTarea(tarea1);
+  gestor.agregarTarea(tarea2);
+  gestor.agregarTarea(tarea3);
 }
