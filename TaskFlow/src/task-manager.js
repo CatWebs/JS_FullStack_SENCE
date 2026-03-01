@@ -50,7 +50,7 @@ function itemTemplate(item) {
             </div>
             <div class="col task-actions">
               <button
-                class="btn btn-task btn-edit"
+                class="btn btn-edit"
                 type="button"
                 id="edit${item.id}"
                 onclick="editTask(${item.id})"
@@ -62,7 +62,7 @@ function itemTemplate(item) {
                 <i class="bi bi-pen"></i>
               </button>
               <button
-                class="btn btn-task btn-delete"
+                class="btn btn-delete"
                 id="delete${item.id}"
                 onclick="deleteTask(${item.id})"
                 type="button"

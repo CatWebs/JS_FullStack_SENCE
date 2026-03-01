@@ -101,7 +101,7 @@ footer {
 }
 .btn-filtro,
 .btn-cancel-modal,
-.btn-task {
+.btn-edit {
   /*Botón para abrir un modal con filtros*/
   color: var(--color-texto-destacado);
   background-color: var(--bg-light);
@@ -113,8 +113,14 @@ footer {
   }
 }
 
+.btn-delete,
+.btn-delete-all {
+  border: 1px solid var(--danger);
+  color: var(--danger);
+}
+
 .btn-delete:hover,
-.btn-delete:focus {
+.btn-delete-all:hover {
   background-color: var(--danger);
   color: var(--bg-light);
 }
