@@ -28,7 +28,7 @@ function renderFecha(requerido, fecha) {
     : `<span class="span-date"> <i class="bi bi-calendar"> </i> Sin fecha límite</span>`;
 }
 
-function itemTemplate(item, id) {
+function itemTemplate(item) {
   return `<div class="item-box">
           <div class="row m-0 p-4">
             <div class="col task-data">
@@ -37,9 +37,9 @@ function itemTemplate(item, id) {
                   class="form-check-input task-check-status me-2"
                   type="checkbox"
                   value="${item.estado}"
-                  id="item${id}"
+                  id="item${item.id}"
                 />
-                <label class="form-check-label" for="item${id}">
+                <label class="form-check-label" for="item${item.id}">
                   ${item.descripcion}
                 </label>
               </div>
@@ -52,8 +52,8 @@ function itemTemplate(item, id) {
               <button
                 class="btn btn-task btn-edit"
                 type="button"
-                id="edit${id}"
-                onclick="editTask(${id})"
+                id="edit${item.id}"
+                onclick="editTask(${item.id})"
                 data-bs-placement="bottom"
                 data-bs-title="Editar tarea"
                 data-bs-toggle="modal"
@@ -63,8 +63,8 @@ function itemTemplate(item, id) {
               </button>
               <button
                 class="btn btn-task btn-delete"
-                id="delete${id}"
-                onclick="deleteTask(${id})"
+                id="delete${item.id}"
+                onclick="deleteTask(${item.id})"
                 type="button"
                 data-bs-toggle="tooltip"
                 data-bs-placement="bottom"
@@ -77,11 +77,11 @@ function itemTemplate(item, id) {
         </div>`;
 }
 
-function itemCompleteTemplate(item, id) {
+function itemCompleteTemplate(item) {
   return `<div class="item-box-complete p-4">
           <div class="form-check">
-            <input class="form-check-input task-check-status" type="checkbox" value=${item.estado} id='item${id}' checked/>
-            <label class="form-check-label form-check-label-complete" for='item${id}'>
+            <input class="form-check-input task-check-status" type="checkbox" value=${item.estado} id='item${item.id}' checked/>
+            <label class="form-check-label form-check-label-complete" for='item${item.id}'>
               ${item.descripcion}
             </label>
           </div>
@@ -100,9 +100,9 @@ function renderTasks() {
 
   tasks.forEach((item) => {
     if (!item.estado) {
-      taskContainer.innerHTML += itemTemplate(item, item.id);
+      taskContainer.innerHTML += itemTemplate(item);
     } else {
-      taskCompleteContainer.innerHTML += itemCompleteTemplate(item, item.id);
+      taskCompleteContainer.innerHTML += itemCompleteTemplate(item);
     }
     console.log(item);
   });
@@ -125,6 +125,7 @@ fechaRequerida.addEventListener("change", () => {
   }
 });
 
+const addTaskForm = document.getElementById("addTaskForm");
 addTaskForm.addEventListener("submit", (e) => {
   e.preventDefault();
   const descripcion = document.getElementById("descriptionInput").value.trim();
@@ -152,9 +153,8 @@ document.addEventListener("DOMContentLoaded", () => {
   renderTasks();
 });
 
-document.addEventListener("change", (e) => {
-  if (!e.target.classList.contains("task-check-status")) return;
-
+const statusTask = document.querySelectorAll("task-check-status");
+statusTask.addEventListener("change", (e) => {
   const id = Number(e.target.id.replace("item", ""));
   const checked = e.target.checked;
 
