@@ -14,7 +14,7 @@ const addTaskForm = document.getElementById("addTaskForm");
 addTaskForm.addEventListener("submit", (e) => {
   e.preventDefault();
   const descripcion = document.getElementById("descriptionInput").value.trim();
-  let newID = tasks.length;
+  let newID = gestor.tasks.length;
   const prioridad = Number(document.getElementById("priorityInput").value);
   const fechaLimite = document.getElementById("fecha").value.trim();
   const fechaRequeridaInput =
@@ -28,26 +28,11 @@ addTaskForm.addEventListener("submit", (e) => {
     fechaLimite,
     undefined,
   );
-  tasks.push(task);
-  localStorage.setItem("tasks", JSON.stringify(tasks));
+  gestor.agregarTarea(task);
   renderTasks();
   addTaskForm.reset();
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-  renderTasks();
-});
-
-document.addEventListener("change", (e) => {
-  if (!e.target.classList.contains("task-check-status")) return;
-  const id = Number(e.target.id.replace("item", ""));
-  const checked = e.target.checked;
-
-  const task = tasks.find((t) => t.id === id);
-  if (!task) return;
-
-  task.toggleEstado(checked);
-
-  localStorage.setItem("tasks", JSON.stringify(tasks));
   renderTasks();
 });
