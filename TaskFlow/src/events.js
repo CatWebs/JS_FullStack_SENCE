@@ -38,8 +38,8 @@ document.addEventListener("DOMContentLoaded", () => {
   renderTasks();
 });
 
-const statusTask = document.querySelectorAll("task-check-status");
-statusTask.addEventListener("change", (e) => {
+document.addEventListener("change", (e) => {
+  if (!e.target.classList.contains("task-check-status")) return;
   const id = Number(e.target.id.replace("item", ""));
   const checked = e.target.checked;
 
