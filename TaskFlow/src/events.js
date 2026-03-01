@@ -36,7 +36,7 @@ addTaskForm.addEventListener("submit", (e) => {
 
     tareaEnEdicion = null;
   } else {
-    let newID = gestor.tasks.length;
+    let newID = Date.now();
     const task = new Task(
       newID,
       descripcion,
