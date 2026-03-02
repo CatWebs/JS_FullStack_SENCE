@@ -19,17 +19,8 @@ function renderPrioridad(prioridad) {
   return `<span class="badge badge-prioridad ${clasePrioridad}">${valorPrioridad}</span>`;
 }
 
-// Plantilla que renderiza el Span donde va la fecha límite de cada tarea.
-function renderFecha(requerido, fecha) {
-  return requerido
-    ? `<span class="span-date"> <i class="bi bi-calendar"> </i> ${fecha}</span>`
-    : `<span class="span-date"> <i class="bi bi-calendar"> </i> Sin fecha límite</span>`;
-}
-
 // Función para calcular y renderizar el tiempo restante de cada tarea.
-function calcTime(fechaRequerida, fechaLimite) {
-  if (!fechaRequerida) return "";
-
+function calcTime(fechaLimite) {
   const dateNow = new Date();
   const limit = new Date(fechaLimite);
   const diff = limit - dateNow;
@@ -108,8 +99,8 @@ function itemTemplate(item) {
               </div>
               <div class="task-info ms-4">
                 ${renderPrioridad(prioridad)}
-                ${renderFecha(fechaRequerida, fechaLimite)}
-                ${calcTime(fechaRequerida, fechaLimite)}
+                ${fechaRequerida ? `<span class="span-date"> <i class="bi bi-calendar"> </i> ${fechaLimite}</span>` : `<span class="span-date"> <i class="bi bi-calendar"> </i> Sin fecha límite</span>`}
+                ${fechaRequerida ? calcTime(fechaLimite) : ""}
               </div>
             </div>
             <div class="col task-actions">
