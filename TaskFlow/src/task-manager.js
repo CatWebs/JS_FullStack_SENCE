@@ -89,6 +89,8 @@ function updateCountdowns() {
 
 // Plantilla visual para las tareas que no están marcadas, es decir, tareas activas.
 function itemTemplate(item) {
+  const { id, descripcion, estado, prioridad, fechaRequerida, fechaLimite } =
+    item;
   return `<div class="item-box">
           <div class="row m-0 p-4">
             <div class="col task-data">
@@ -96,40 +98,40 @@ function itemTemplate(item) {
                 <input
                   class="form-check-input task-check-status me-2"
                   type="checkbox"
-                  ${item.estado ? "checked" : ""}
-                  id="item${item.id}"
-                  onchange="toggleTask(${item.id}, this.checked)"
+                  ${estado ? "checked" : ""}
+                  id="item${id}"
+                  onchange="toggleTask(${id}, this.checked)"
                 />
-                <label class="form-check-label" for="item${item.id}">
-                  ${item.descripcion}
+                <label class="form-check-label" for="item${id}">
+                  ${descripcion}
                 </label>
               </div>
               <div class="task-info ms-4">
-                ${renderPrioridad(item.prioridad)}
-                ${renderFecha(item.fechaRequerida, item.fechaLimite)}
-                ${calcTime(item.fechaRequerida, item.fechaLimite)}
+                ${renderPrioridad(prioridad)}
+                ${renderFecha(fechaRequerida, fechaLimite)}
+                ${calcTime(fechaRequerida, fechaLimite)}
               </div>
             </div>
             <div class="col task-actions">
               <button
                 class="btn btn-edit btn-with-tooltip"
                 type="button"
-                id="edit${item.id}"
+                id="edit${id}"
                 data-bs-placement="bottom"
                 data-bs-title="Editar tarea"
                 data-bs-toggle="tooltip"
-                onclick="editTask(${item.id})"
+                onclick="editTask(${id})"
               >
                 <i class="bi bi-pen"></i>
               </button>
               <button
                 class="btn btn-delete btn-with-tooltip"
-                id="delete${item.id}"
+                id="delete${id}"
                 type="button"
                 data-bs-toggle="tooltip"
                 data-bs-placement="bottom"
                 data-bs-title="Eliminar tarea"
-                onclick="deleteTask(${item.id})"
+                onclick="deleteTask(${id})"
               >
                 <i class="bi bi-trash"></i>
               </button>
@@ -140,14 +142,15 @@ function itemTemplate(item) {
 
 // Plantilla visual para las tareas marcadas como realizadas.
 function itemCompleteTemplate(item) {
+  const { id, descripcion, fechaRealizada } = item;
   return `<div class="item-box-complete p-4">
           <div class="form-check">
-            <input class="form-check-input task-check-status" type="checkbox" id='item${item.id}' checked onchange="toggleTask(${item.id}, this.checked)"/>
-            <label class="form-check-label form-check-label-complete" for='item${item.id}'>
-              ${item.descripcion}
+            <input class="form-check-input task-check-status" type="checkbox" id='item${id}' checked onchange="toggleTask(${id}, this.checked)"/>
+            <label class="form-check-label form-check-label-complete" for='item${id}'>
+              ${descripcion}
             </label>
           </div>
-          <span class="span-complete">COMPLETADO EL ${item.fechaRealizada}</span>
+          <span class="span-complete">COMPLETADO EL ${fechaRealizada}</span>
         </div>`;
 }
 
