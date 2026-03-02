@@ -86,4 +86,5 @@ addTaskForm.addEventListener("submit", async (e) => {
 // Evento que renderiza las tareas cada vez que se recarga la página.
 document.addEventListener("DOMContentLoaded", () => {
   renderTasks();
+  setInterval(updateCountdowns, 1000);
 });

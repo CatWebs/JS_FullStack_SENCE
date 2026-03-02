@@ -26,6 +26,67 @@ function renderFecha(requerido, fecha) {
     : `<span class="span-date"> <i class="bi bi-calendar"> </i> Sin fecha límite</span>`;
 }
 
+// Función para calcular y renderizar el tiempo restante de cada tarea.
+function calcTime(fechaRequerida, fechaLimite) {
+  if (!fechaRequerida) return "";
+
+  const dateNow = new Date();
+  const limit = new Date(fechaLimite);
+  const diff = limit - dateNow;
+
+  let timeMessage = "";
+  let timeClassSpan = "countdown span-date ms-2";
+
+  if (diff <= 0) {
+    timeMessage = "Tarea vencida";
+    timeClassSpan = "countdown span-date ms-2 text-danger";
+  } else {
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((diff / (1000 * 60)) % 60);
+    const seconds = Math.floor((diff / 1000) % 60);
+
+    timeMessage = `Quedan ${days}d ${hours}h ${minutes}m ${seconds}s`;
+  }
+
+  return `
+    <span 
+      class="${timeClassSpan}"
+      data-fecha-limite="${fechaLimite}"
+    >
+      <i class="bi bi-clock"></i> ${timeMessage}
+    </span>
+  `;
+}
+
+// Función para actualizar el tiempo restante de cada tarea.
+function updateCountdowns() {
+  const countdowns = document.querySelectorAll(".countdown");
+
+  countdowns.forEach((span) => {
+    const fechaLimite = span.dataset.fechaLimite;
+    const dateNow = new Date();
+    const limit = new Date(fechaLimite);
+    const diff = limit - dateNow;
+
+    if (diff <= 0) {
+      span.textContent = "Tarea vencida";
+      span.classList.add("text-danger");
+      return;
+    }
+
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((diff / (1000 * 60)) % 60);
+    const seconds = Math.floor((diff / 1000) % 60);
+
+    span.innerHTML = `
+      <i class="bi bi-clock"></i>
+      Quedan ${days}d ${hours}h ${minutes}m ${seconds}s
+    `;
+  });
+}
+
 // Plantilla visual para las tareas que no están marcadas, es decir, tareas activas.
 function itemTemplate(item) {
   return `<div class="item-box">
@@ -46,6 +107,7 @@ function itemTemplate(item) {
               <div class="task-info ms-4">
                 ${renderPrioridad(item.prioridad)}
                 ${renderFecha(item.fechaRequerida, item.fechaLimite)}
+                ${calcTime(item.fechaRequerida, item.fechaLimite)}
               </div>
             </div>
             <div class="col task-actions">
