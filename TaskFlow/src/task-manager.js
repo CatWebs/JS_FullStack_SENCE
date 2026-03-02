@@ -1,3 +1,4 @@
+// Función para establecer texto y estilo del span según prioridad de la tarea.
 function renderPrioridad(prioridad) {
   let valorPrioridad;
   let clasePrioridad;
@@ -10,10 +11,6 @@ function renderPrioridad(prioridad) {
       valorPrioridad = "Prioridad media";
       clasePrioridad = "badge-media";
       break;
-    case 3:
-      valorPrioridad = "Prioridad baja";
-      clasePrioridad = "badge-baja";
-      break;
     default:
       valorPrioridad = "Prioridad baja";
       clasePrioridad = "badge-baja";
@@ -22,12 +19,14 @@ function renderPrioridad(prioridad) {
   return `<span class="badge badge-prioridad ${clasePrioridad}">${valorPrioridad}</span>`;
 }
 
+// Plantilla que renderiza el Span donde va la fecha límite de cada tarea.
 function renderFecha(requerido, fecha) {
   return requerido
     ? `<span class="span-date"> <i class="bi bi-calendar"> </i> ${fecha}</span>`
     : `<span class="span-date"> <i class="bi bi-calendar"> </i> Sin fecha límite</span>`;
 }
 
+// Plantilla visual para las tareas que no están marcadas, es decir, tareas activas.
 function itemTemplate(item) {
   return `<div class="item-box">
           <div class="row m-0 p-4">
@@ -77,6 +76,7 @@ function itemTemplate(item) {
         </div>`;
 }
 
+// Plantilla visual para las tareas marcadas como realizadas.
 function itemCompleteTemplate(item) {
   return `<div class="item-box-complete p-4">
           <div class="form-check">
@@ -89,11 +89,13 @@ function itemCompleteTemplate(item) {
         </div>`;
 }
 
+// Función que lee el estado de una tarea para renderizar de nuevo las tareas cuando el estado cambia.
 function toggleTask(id, estado) {
   gestor.toggleEstadoTarea(id, estado);
   renderTasks();
 }
 
+// Función para renderizar cada tarea en el DOM
 function renderTasks() {
   const taskContainer = document.getElementById("task-container");
   const taskCompleteContainer = document.getElementById(
@@ -102,7 +104,7 @@ function renderTasks() {
 
   let activeHTML = "";
   let completeHTML = "";
-
+  // Renderizar tareas según estado.
   gestor.tasks.forEach((item) => {
     if (!item.estado) {
       activeHTML += itemTemplate(item);
@@ -114,6 +116,7 @@ function renderTasks() {
   taskContainer.innerHTML = activeHTML;
   taskCompleteContainer.innerHTML = completeHTML;
 
+  // Actualizar badge que indica cantidad de tareas activas
   const activeTasks = document.querySelector(".badge-task");
   if (activeTasks) {
     activeTasks.textContent = gestor.tasks.filter(
@@ -121,11 +124,13 @@ function renderTasks() {
     ).length;
   }
 
+  // Genero el tooltip de cada tarea, cada vez que se renderiza.
   document
     .querySelectorAll('[data-bs-toggle="tooltip"]')
     .forEach((el) => new bootstrap.Tooltip(el));
 }
 
+// Función para mostrar el input type Date del formulario
 function toggleDateVisibility(show) {
   const container = document.getElementById("displayDateInput");
   if (!container) return;
@@ -133,6 +138,8 @@ function toggleDateVisibility(show) {
   container.classList.toggle("d-none", !show);
   container.classList.toggle("d-block", show);
 }
+
+// Función para eliminar una tarea individual activa seleccionada por el usuario.
 function deleteTask(id) {
   Swal.fire({
     title: "Estas seguro de eliminar esta tarea?",
@@ -155,6 +162,7 @@ function deleteTask(id) {
   });
 }
 
+// Función para eliminar todas las tareas realizadas.
 function deleteAllTask() {
   Swal.fire({
     title: "Estas seguro de eliminar todas las tareas realizadas?",
@@ -178,6 +186,7 @@ function deleteAllTask() {
   });
 }
 
+// Función para editar una tarea individual seleccionada por el usuario. No aplica a tareas completadas.
 function editTask(id) {
   const task = gestor.obtenerTarea(id);
   if (!task) return;
@@ -199,9 +208,11 @@ function editTask(id) {
   modal.show();
 }
 
+// Función que reinicia una variable global utilizada para definir si la tarea está en edición o si está siendo creada.
 const addButton = document.getElementById("btnAddTask");
 addButton.onclick = () => (tareaEnEdicion = null);
 
+// Función que aplica un reset al formulario.
 function resetTaskForm() {
   const form = document.getElementById("addTaskForm");
 

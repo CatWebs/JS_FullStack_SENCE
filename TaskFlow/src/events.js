@@ -1,12 +1,15 @@
+// Evento que genera la visibilidad del input type Date en el formulario.
 const fechaRequerida = document.getElementById("switchCheckDate");
 fechaRequerida.addEventListener("change", () => {
   toggleDateVisibility(fechaRequerida.checked);
 });
 
+// Evento que resetea el formulario al ocultar el modal.
 document
   .getElementById("addTask")
   .addEventListener("hidden.bs.modal", resetTaskForm);
 
+// Evento Submit del formulario
 const addTaskForm = document.getElementById("addTaskForm");
 addTaskForm.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -17,6 +20,7 @@ addTaskForm.addEventListener("submit", (e) => {
   const fechaRequeridaInput =
     document.getElementById("switchCheckDate").checked;
   if (tareaEnEdicion !== null) {
+    // Control del formulario cuando la tarea se encuentra en edición
     const task = gestor.obtenerTarea(tareaEnEdicion);
     if (!task) return;
 
@@ -29,6 +33,7 @@ addTaskForm.addEventListener("submit", (e) => {
 
     tareaEnEdicion = null;
   } else {
+    // Control del formulario cuando la tarea se está creando.
     let newID = Date.now();
     const task = new Task(
       newID,
@@ -42,6 +47,7 @@ addTaskForm.addEventListener("submit", (e) => {
     gestor.agregarTarea(task);
   }
 
+  // Renderizo tareas y normalizo textos del modal del formulario.
   renderTasks();
   document.querySelector("#addTask .modal-title").textContent = "Agregar tarea";
 
@@ -51,6 +57,7 @@ addTaskForm.addEventListener("submit", (e) => {
   modal.hide();
 });
 
+// Evento que renderiza las tareas cada vez que se recarga la página.
 document.addEventListener("DOMContentLoaded", () => {
   renderTasks();
 });
