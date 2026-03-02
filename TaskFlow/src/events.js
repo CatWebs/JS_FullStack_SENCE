@@ -11,8 +11,22 @@ document
 
 // Evento Submit del formulario
 const addTaskForm = document.getElementById("addTaskForm");
-addTaskForm.addEventListener("submit", (e) => {
+addTaskForm.addEventListener("submit", async (e) => {
   e.preventDefault();
+  const btnSubmit = document.getElementById("btnAddTaskSubmit");
+  const btnCancel = document.querySelector(".btn-cancel-modal");
+  const btnClose = document.querySelector("#addTask .btn-close");
+
+  if (tareaEnEdicion === null) {
+    btnSubmit.disabled = true;
+    btnCancel.disabled = true;
+    btnClose.disabled = true;
+    btnSubmit.innerHTML = `
+      <div class="spinner-border" style="width: 15px; height: 15px" role="status"></div>
+      Agregando tarea
+    `;
+    await new Promise((resolve) => setTimeout(resolve, 3000));
+  }
 
   const descripcion = document.getElementById("descriptionInput").value.trim();
   const prioridad = Number(document.getElementById("priorityInput").value);
@@ -31,7 +45,14 @@ addTaskForm.addEventListener("submit", (e) => {
 
     gestor.guardarEnLocalStorage();
 
-    tareaEnEdicion = null;
+    Toastify({
+      text: "Tarea editada con éxito",
+      offset: {
+        x: 50,
+        y: 10,
+      },
+      duration: 3000,
+    }).showToast();
   } else {
     // Control del formulario cuando la tarea se está creando.
     let newID = Date.now();
@@ -44,17 +65,26 @@ addTaskForm.addEventListener("submit", (e) => {
       fechaLimite,
       undefined,
     );
+
     gestor.agregarTarea(task);
+
+    Toastify({
+      text: "Tarea agregada con éxito",
+      offset: {
+        x: 50,
+        y: 10,
+      },
+      duration: 3000,
+    }).showToast();
   }
 
-  // Renderizo tareas y normalizo textos del modal del formulario.
-  renderTasks();
-  document.querySelector("#addTask .modal-title").textContent = "Agregar tarea";
-
-  document.querySelector("#addTaskForm button[type='submit']").textContent =
-    "+ Agregar tarea";
+  // Renderizo tareas, habilito botones y cierro el modal.
+  btnSubmit.disabled = false;
+  btnCancel.disabled = false;
+  btnClose.disabled = false;
   const modal = bootstrap.Modal.getInstance(document.getElementById("addTask"));
   modal.hide();
+  renderTasks();
 });
 
 // Evento que renderiza las tareas cada vez que se recarga la página.
