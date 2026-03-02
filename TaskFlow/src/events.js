@@ -14,18 +14,17 @@ const addTaskForm = document.getElementById("addTaskForm");
 addTaskForm.addEventListener("submit", async (e) => {
   e.preventDefault();
   const btnSubmit = document.getElementById("btnAddTaskSubmit");
-  const btnCancel = document.querySelector(".btn-cancel-modal");
-  const btnClose = document.querySelector("#addTask .btn-close");
-
   if (tareaEnEdicion === null) {
-    btnSubmit.disabled = true;
-    btnCancel.disabled = true;
-    btnClose.disabled = true;
+    setFormLoading(true);
+
     btnSubmit.innerHTML = `
-      <div class="spinner-border" style="width: 15px; height: 15px" role="status"></div>
-      Agregando tarea
-    `;
+  <div class="spinner-border" style="width: 15px; height: 15px" role="status"></div>
+  Agregando tarea
+`;
+
     await new Promise((resolve) => setTimeout(resolve, 3000));
+
+    setFormLoading(false);
   }
 
   const descripcion = document.getElementById("descriptionInput").value.trim();
@@ -79,9 +78,6 @@ addTaskForm.addEventListener("submit", async (e) => {
   }
 
   // Renderizo tareas, habilito botones y cierro el modal.
-  btnSubmit.disabled = false;
-  btnCancel.disabled = false;
-  btnClose.disabled = false;
   const modal = bootstrap.Modal.getInstance(document.getElementById("addTask"));
   modal.hide();
   renderTasks();

@@ -238,3 +238,14 @@ function resetTaskForm() {
   document.querySelector("#addTaskForm button[type='submit']").textContent =
     "+ Agregar tarea";
 }
+
+// Función para deshabilitar botones mientras se agrega una tarea.
+function setFormLoading(isLoading) {
+  const btnSubmit = document.getElementById("btnAddTaskSubmit");
+  const btnCancel = document.querySelector(".btn-cancel-modal");
+  const btnClose = document.querySelector("#addTask .btn-close");
+
+  btnSubmit.disabled = isLoading;
+  btnCancel.disabled = isLoading;
+  btnClose.disabled = isLoading;
+}
