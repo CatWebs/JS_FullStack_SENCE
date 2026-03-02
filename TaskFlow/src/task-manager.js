@@ -19,62 +19,56 @@ function renderPrioridad(prioridad) {
   return `<span class="badge badge-prioridad ${clasePrioridad}">${valorPrioridad}</span>`;
 }
 
-// Función para calcular y renderizar el tiempo restante de cada tarea.
+// Función para calcular el tiempo restante de cada tarea.
 function calcTime(fechaLimite) {
-  const dateNow = new Date();
+  const now = new Date();
   const limit = new Date(fechaLimite);
-  const diff = limit - dateNow;
-
-  let timeMessage = "";
-  let timeClassSpan = "countdown span-date ms-2";
+  const diff = limit - now;
 
   if (diff <= 0) {
-    timeMessage = "Tarea vencida";
-    timeClassSpan = "countdown span-date ms-2 text-danger";
-  } else {
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-    const minutes = Math.floor((diff / (1000 * 60)) % 60);
-    const seconds = Math.floor((diff / 1000) % 60);
-
-    timeMessage = `Quedan ${days}d ${hours}h ${minutes}m ${seconds}s`;
+    return {
+      expired: true,
+      text: "Tarea vencida",
+    };
   }
+
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+  const minutes = Math.floor((diff / (1000 * 60)) % 60);
+  const seconds = Math.floor((diff / 1000) % 60);
+
+  return {
+    expired: false,
+    text: `Quedan ${days}d ${hours}h ${minutes}m ${seconds}s`,
+  };
+}
+
+// Función para renderizar el tiempo restante de cada tarea
+function renderTime(fechaLimite) {
+  const { expired, text } = calcTime(fechaLimite);
+  const baseClass = "countdown span-date ms-2";
+  const classes = expired ? `${baseClass} text-danger` : baseClass;
 
   return `
     <span 
-      class="${timeClassSpan}"
+      class="${classes}"
       data-fecha-limite="${fechaLimite}"
     >
-      <i class="bi bi-clock"></i> ${timeMessage}
+      <i class="bi bi-clock me-1"></i><span class="time-text">${text}</span> 
     </span>
   `;
 }
 
 // Función para actualizar el tiempo restante de cada tarea.
 function updateCountdowns() {
-  const countdowns = document.querySelectorAll(".countdown");
+  document.querySelectorAll(".countdown").forEach((span) => {
+    const { expired, text } = calcTime(span.dataset.fechaLimite);
 
-  countdowns.forEach((span) => {
-    const fechaLimite = span.dataset.fechaLimite;
-    const dateNow = new Date();
-    const limit = new Date(fechaLimite);
-    const diff = limit - dateNow;
-
-    if (diff <= 0) {
-      span.textContent = "Tarea vencida";
-      span.classList.add("text-danger");
-      return;
+    span.classList.toggle("text-danger", expired);
+    const timeText = span.querySelector(".time-text");
+    if (timeText) {
+      timeText.textContent = text;
     }
-
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-    const minutes = Math.floor((diff / (1000 * 60)) % 60);
-    const seconds = Math.floor((diff / 1000) % 60);
-
-    span.innerHTML = `
-      <i class="bi bi-clock"></i>
-      Quedan ${days}d ${hours}h ${minutes}m ${seconds}s
-    `;
   });
 }
 
@@ -100,7 +94,7 @@ function itemTemplate(item) {
               <div class="task-info ms-4">
                 ${renderPrioridad(prioridad)}
                 ${fechaRequerida ? `<span class="span-date"> <i class="bi bi-calendar"> </i> ${fechaLimite}</span>` : `<span class="span-date"> <i class="bi bi-calendar"> </i> Sin fecha límite</span>`}
-                ${fechaRequerida ? calcTime(fechaLimite) : ""}
+                ${fechaRequerida ? renderTime(fechaLimite) : ""}
               </div>
             </div>
             <div class="col task-actions">
