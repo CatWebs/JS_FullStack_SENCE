@@ -22,7 +22,10 @@ function renderPrioridad(prioridad) {
 // Función para calcular el tiempo restante de cada tarea.
 function calcTime(fechaLimite) {
   const now = new Date();
-  const limit = new Date(fechaLimite);
+
+  const [y, m, d] = fechaLimite.split("-").map(Number);
+  const limit = new Date(y, m - 1, d, 23, 59, 59);
+
   const diff = limit - now;
 
   if (diff <= 0) {
