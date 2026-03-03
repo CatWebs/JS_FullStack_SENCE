@@ -18,7 +18,8 @@ function renderData(empresa) {
 
 async function loadData() {
   const contenedor = document.getElementById("api-data-container");
-  contenedor.innerHTML = `<div class="loader"></div>`;
+  const loader = document.getElementById("loader");
+  loader.innerHTML = `<div class="loader"></div>`;
   try {
     let response = await fetch("https://retoolapi.dev/3U6bRe/empresas/");
     if (response.status === 404) {
@@ -33,6 +34,7 @@ async function loadData() {
       throw new Error(`Error en la solicitud: ${response.status}`);
     }
     let empresas = await response.json();
+    loader.innerHTML = "";
     contenedor.innerHTML = empresas.map(templateData).join("");
   } catch (error) {
     console.error("error: ", error);
@@ -40,6 +42,53 @@ async function loadData() {
   }
 }
 
+async function createEmpresa(nuevaEmpresa) {
+  try {
+    const response = await fetch(
+      "https://api-generator.retool.com/3U6bRe/empresas",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(nuevaEmpresa),
+      },
+    );
+
+    if (!response.ok) {
+      throw new Error(`Error al crear empresa: ${response.status}`);
+    }
+
+    const data = await response.json();
+    console.log("Empresa creada:", data);
+
+    loadData();
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   loadData();
+});
+
+document.getElementById("empresa-form").addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  const nuevaEmpresa = {
+    nombreEmpresa: document.getElementById("nombreEmpresa").value,
+    direccion: document.getElementById("direccion").value,
+    empleados: Number(document.getElementById("empleados").value),
+  };
+  Toastify({
+    text: "Empresa añadida con éxito",
+    offset: {
+      x: 50,
+      y: 10,
+    },
+    duration: 3000,
+  }).showToast();
+  createEmpresa(nuevaEmpresa);
+  const form = document.getElementById("empresa-form");
+  form.reset();
 });

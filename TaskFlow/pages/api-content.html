@@ -54,18 +54,50 @@
           class="title-box d-flex justify-content-between align-items-center"
         >
           <h2>API de datos de empresas</h2>
-          <button
-            id="apiFetchButton"
+          <div id="loader"></div>
+          <a
+            href="#addForm"
             type="button"
-            class="btn mb-1 btn-agregar fw-bold"
+            class="btn mb-1 btn-agregar fw-bold text-decoration-none"
           >
             + Añadir empresa
-          </button>
+          </a>
         </div>
         <div
           class="row row-cols-1 row-cols-md-3 g-4 px-3 pb-4"
           id="api-data-container"
         ></div>
+      </section>
+      <section id="addForm" class="box mb-5">
+        <div class="title-box">
+          <h2>Agregar nueva empresa</h2>
+        </div>
+        <form id="empresa-form" class="d-flex flex-column container p-4">
+          <input
+            type="text"
+            class="mb-3"
+            id="nombreEmpresa"
+            placeholder="Nombre"
+            required
+          />
+          <input
+            type="text"
+            id="direccion"
+            placeholder="Dirección"
+            class="mb-3"
+            required
+          />
+          <input
+            type="number"
+            id="empleados"
+            placeholder="Empleados"
+            class="mb-3"
+            required
+          />
+          <button type="submit" class="mb-3 btn-agregar">
+            Agregar empresa
+          </button>
+        </form>
       </section>
     </main>
 
