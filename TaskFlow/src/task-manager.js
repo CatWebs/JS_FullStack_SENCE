@@ -19,6 +19,14 @@ function renderPrioridad(prioridad) {
   return `<span class="badge badge-prioridad ${clasePrioridad}">${valorPrioridad}</span>`;
 }
 
+function renderDescription(descripcion) {
+  if (descripcion === "") {
+    return `<p class="text-muted fst-italic item-description ms-4 my-2">Tarea sin descripción</p>`;
+  } else {
+    return `<p class="fst-italic item-description ms-4 text-dark my-2">${descripcion}</p>`;
+  }
+}
+
 // Función para calcular el tiempo restante de cada tarea.
 function calcTime(fechaLimite) {
   const now = new Date();
@@ -77,8 +85,15 @@ function updateCountdowns() {
 
 // Plantilla visual para las tareas que no están marcadas, es decir, tareas activas.
 function itemTemplate(item) {
-  const { id, descripcion, estado, prioridad, fechaRequerida, fechaLimite } =
-    item;
+  const {
+    id,
+    titulo,
+    descripcion,
+    estado,
+    prioridad,
+    fechaRequerida,
+    fechaLimite,
+  } = item;
   return `<div class="item-box">
           <div class="row m-0 p-4">
             <div class="col task-data">
@@ -91,8 +106,11 @@ function itemTemplate(item) {
                   onchange="toggleTask(${id}, this.checked)"
                 />
                 <label class="form-check-label" for="item${id}">
-                  ${descripcion}
+                  ${titulo}
                 </label>
+              </div>
+              <div>
+                ${renderDescription(descripcion)}
               </div>
               <div class="task-info ms-4">
                 ${renderPrioridad(prioridad)}
@@ -258,7 +276,7 @@ function editTask(id) {
   document.querySelector("#addTask .modal-title").textContent = "Editar tarea";
   document.querySelector("#addTaskForm button[type='submit']").textContent =
     "Guardar cambios";
-
+  document.getElementById("titleInput").value = task.titulo;
   document.getElementById("descriptionInput").value = task.descripcion;
   document.getElementById("priorityInput").value = task.prioridad;
   document.getElementById("switchCheckDate").checked = task.fechaRequerida;

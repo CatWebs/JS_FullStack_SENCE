@@ -1,6 +1,7 @@
 class Task {
   constructor(
     id,
+    titulo,
     descripcion,
     estado,
     prioridad,
@@ -10,6 +11,7 @@ class Task {
     fechaRealizada = undefined,
   ) {
     this.id = id;
+    this.titulo = titulo;
     this.descripcion = descripcion;
     this.estado = estado;
     this.prioridad = prioridad;
@@ -69,6 +71,7 @@ class TaskManager {
         (t) =>
           new Task(
             t.id,
+            t.titulo,
             t.descripcion,
             t.estado,
             t.prioridad,
@@ -89,6 +92,7 @@ if (gestor.tasks.length === 0) {
   const tarea1 = new Task(
     0,
     "Aplicar conceptos de POO para estructurar el código de la aplicación",
+    "Crear una clase Tarea con propiedades como id, descripción, estado, etc. Implementar métodos para cambiar el estado de la tarea y eliminarla. Crear una clase GestorTareas que administre una lista de tareas.",
     false,
     1,
     false,
@@ -99,6 +103,7 @@ if (gestor.tasks.length === 0) {
   const tarea2 = new Task(
     1,
     "Aplicar nuevas funcionalidades de JavaScript ES6+",
+    "",
     false,
     2,
     true,
@@ -109,6 +114,7 @@ if (gestor.tasks.length === 0) {
   const tarea3 = new Task(
     2,
     "Implementar eventos en la aplicación",
+    "Crear un formulario HTML para agregar nuevas tareas. Capturar eventos de submit y click para gestionar tareas. Modificar el DOM dinámicamente para mostrar la lista de tareas.",
     false,
     3,
     true,

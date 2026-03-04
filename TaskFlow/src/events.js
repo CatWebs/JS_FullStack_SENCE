@@ -27,6 +27,7 @@ addTaskForm.addEventListener("submit", async (e) => {
     setFormLoading(false);
   }
 
+  const titulo = document.getElementById("titleInput").value.trim();
   const descripcion = document.getElementById("descriptionInput").value.trim();
   const prioridad = Number(document.getElementById("priorityInput").value);
   const fechaLimite = document.getElementById("fecha").value.trim();
@@ -37,6 +38,7 @@ addTaskForm.addEventListener("submit", async (e) => {
     const task = gestor.obtenerTarea(tareaEnEdicion);
     if (!task) return;
 
+    task.titulo = titulo;
     task.descripcion = descripcion;
     task.prioridad = prioridad;
     task.fechaRequerida = fechaRequeridaInput;
@@ -57,6 +59,7 @@ addTaskForm.addEventListener("submit", async (e) => {
     let newID = Date.now();
     const task = new Task(
       newID,
+      titulo,
       descripcion,
       false,
       prioridad,
