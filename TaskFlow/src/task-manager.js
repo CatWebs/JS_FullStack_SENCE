@@ -192,12 +192,12 @@ function itemTemplate(item) {
 
 // Plantilla visual para las tareas marcadas como realizadas.
 function itemCompleteTemplate(item) {
-  const { id, descripcion, fechaRealizada } = item;
+  const { id, titulo, fechaRealizada } = item;
   return `<div class="item-box-complete p-4">
           <div class="form-check">
             <input class="form-check-input task-check-status" type="checkbox" id='item${id}' checked onchange="toggleTask(${id}, this.checked)"/>
             <label class="form-check-label form-check-label-complete" for='item${id}'>
-              ${descripcion}
+              ${titulo}
             </label>
           </div>
           <span class="span-complete">COMPLETADO EL ${fechaRealizada}</span>
