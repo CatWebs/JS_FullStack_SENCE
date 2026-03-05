@@ -266,6 +266,7 @@ footer {
   justify-content: center;
   align-items: flex-start;
   margin-right: 12px;
+  flex-grow: 1;
 }
 
 .task-input {
@@ -281,7 +282,6 @@ footer {
 }
 .item-description {
   font-size: 0.7rem;
-  margin: 0;
 }
 
 /* HTML: <div class="loader"></div> */
@@ -320,5 +320,6 @@ footer {
   .task-actions {
     flex-direction: row;
     align-items: flex-start;
+    min-width: max-content;
   }
 }

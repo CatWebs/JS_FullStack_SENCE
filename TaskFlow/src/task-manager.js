@@ -19,12 +19,56 @@ function renderPrioridad(prioridad) {
   return `<span class="badge badge-prioridad ${clasePrioridad}">${valorPrioridad}</span>`;
 }
 
-function renderDescription(descripcion) {
+//Botón ver más: Mostrar texto completo
+function completeDescription(id) {
+  const largeContainer = document.getElementById(`large-desc-${id}`);
+  const shortContainer = document.getElementById(`short-desc-${id}`);
+  largeContainer.classList.remove("d-none");
+  shortContainer.className = "d-none";
+}
+
+//Botón ver menos: Mostrar texto truncado
+function hiddenDescription(id) {
+  const shortContainer = document.getElementById(`short-desc-${id}`);
+  const largeContainer = document.getElementById(`large-desc-${id}`);
+  shortContainer.className = "d-flex align-items-center overflow-hidden";
+  largeContainer.className = "d-none";
+}
+
+function renderDescription(id, descripcion) {
+  let render = "";
   if (descripcion === "") {
-    return `<p class="text-muted fst-italic item-description ms-4 my-2">Tarea sin descripción</p>`;
+    render = `<p class="text-muted fst-italic item-description ms-4 my-2">Tarea sin descripción</p>`;
+  } else if (Number(descripcion.length) < 255) {
+    render = `<p class="fst-italic item-description ms-4 text-dark my-2">${descripcion}</p>`;
   } else {
-    return `<p class="fst-italic item-description ms-4 text-dark my-2">${descripcion}</p>`;
+    render = `
+      <div style="max-width: 100%;" class="my-2">
+        <div class="d-flex align-items-center overflow-hidden" id="short-desc-${id}">
+          <p 
+            class="fst-italic item-description ms-4 text-dark text-truncate mb-0"
+          >${descripcion}</p>
+           <button 
+            style="min-width: max-content;" 
+            class="btn-link border-0 bg-transparent item-description text-decoration-none mb-0 text-muted" 
+            role="button" 
+            onclick="completeDescription(${id})"
+            id="ver-mas-${id}"
+          >Ver más</button>
+        </div>
+        <div id="large-desc-${id}" class="d-none">
+          <p class="fst-italic item-description ms-4 text-dark mb-0">${descripcion}</p>
+          <button 
+            style="min-width: max-content;" 
+            class="btn-link border-0 bg-transparent item-description text-decoration-none ms-4 mb-0 text-muted" 
+            role="button" 
+            id="ver-menos-${id}"
+            onclick="hiddenDescription(${id})"
+          >Ver menos</button>
+        </div>
+      </div>`;
   }
+  return render;
 }
 
 // Función para calcular el tiempo restante de cada tarea.
@@ -95,7 +139,7 @@ function itemTemplate(item) {
     fechaLimite,
   } = item;
   return `<div class="item-box">
-          <div class="row m-0 p-4">
+          <div class="row row-cols-2 m-0 p-4">
             <div class="col task-data">
               <div class="task-input">
                 <input
@@ -109,9 +153,9 @@ function itemTemplate(item) {
                   ${titulo}
                 </label>
               </div>
-              <div>
-                ${renderDescription(descripcion)}
-              </div>
+              
+                ${renderDescription(id, descripcion)}
+             
               <div class="task-info ms-4">
                 ${renderPrioridad(prioridad)}
                 ${fechaRequerida ? `<span class="span-date"> <i class="bi bi-calendar"> </i> ${fechaLimite}</span>` : `<span class="span-date"> <i class="bi bi-calendar"> </i> Sin fecha límite</span>`}

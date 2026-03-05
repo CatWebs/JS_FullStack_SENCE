@@ -121,7 +121,9 @@
           <div class="modal-body">
             <form id="addTaskForm">
               <div class="mb-3">
-                <label class="form-label">Título de la tarea</label>
+                <label class="form-label" for="titleInput"
+                  >Título de la tarea</label
+                >
                 <input
                   id="titleInput"
                   type="text"
@@ -131,16 +133,20 @@
                 />
               </div>
               <div class="mb-3">
-                <label class="form-label">Descripción de la tarea</label>
+                <label class="form-label" for="descriptionInput"
+                  >Descripción de la tarea</label
+                >
                 <textarea
                   id="descriptionInput"
                   class="form-control"
                   placeholder="Descripción de la tarea"
-                /></textarea>
+                ></textarea>
               </div>
 
               <div class="mb-3">
-                <label class="form-label">Prioridad de la tarea</label>
+                <label class="form-label" for="priorityInput"
+                  >Prioridad de la tarea</label
+                >
                 <select class="form-select" id="priorityInput">
                   <option selected disabled>Seleccionar</option>
                   <option value="1">Prioridad alta</option>
