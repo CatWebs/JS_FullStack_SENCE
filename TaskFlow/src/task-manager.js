@@ -332,6 +332,7 @@ function editTask(id) {
   }
   const modal = new bootstrap.Modal(document.getElementById("addTask"));
   modal.show();
+  updateCharCount();
 }
 
 // Función que reinicia una variable global utilizada para definir si la tarea está en edición o si está siendo creada.
@@ -363,4 +364,12 @@ function setFormLoading(isLoading) {
   btnSubmit.disabled = isLoading;
   btnCancel.disabled = isLoading;
   btnClose.disabled = isLoading;
+}
+
+// Función para actualizar cantidad de caracteres que quedan disponibles a usar en el título
+function updateCharCount() {
+  const length = 150;
+  const lengthInput = document.getElementById("titleInput").value.length;
+  const helperText = document.getElementById("maxCharHelp");
+  return (helperText.innerText = `${lengthInput}/${length}`);
 }

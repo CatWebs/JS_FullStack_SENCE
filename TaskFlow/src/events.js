@@ -86,6 +86,15 @@ addTaskForm.addEventListener("submit", async (e) => {
   renderTasks();
 });
 
+const input = document.getElementById("titleInput");
+input.addEventListener("keydown", () => {
+  updateCharCount();
+});
+
+const btnAddTask = document
+  .getElementById("btnAddTask")
+  .onclick(() => updateCharCount());
+
 // Evento que renderiza las tareas cada vez que se recarga la página.
 document.addEventListener("DOMContentLoaded", () => {
   renderTasks();
