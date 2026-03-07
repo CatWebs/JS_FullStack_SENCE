@@ -367,9 +367,24 @@ function setFormLoading(isLoading) {
 }
 
 // Función para actualizar cantidad de caracteres que quedan disponibles a usar en el título
+const MAX_TITLE_LENGTH = 150;
 function updateCharCount() {
-  const length = 150;
-  const lengthInput = document.getElementById("titleInput").value.length;
+  const input = document.getElementById("titleInput");
   const helperText = document.getElementById("maxCharHelp");
-  return (helperText.innerText = `${lengthInput}/${length}`);
+  const errorText = document.getElementById("titleError");
+
+  const length = input.value.length;
+  helperText.innerText = `${length}/${MAX_TITLE_LENGTH}`;
+
+  if (length > MAX_TITLE_LENGTH) {
+    helperText.classList.add("text-danger");
+    helperText.classList.remove("text-muted");
+    errorText.style.visibility = "visible";
+    input.classList.add("is-invalid");
+  } else {
+    helperText.classList.remove("text-danger");
+    helperText.classList.add("text-muted");
+    errorText.style.visibility = "hidden";
+    input.classList.remove("is-invalid");
+  }
 }

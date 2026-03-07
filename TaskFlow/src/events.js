@@ -13,6 +13,14 @@ document
 const addTaskForm = document.getElementById("addTaskForm");
 addTaskForm.addEventListener("submit", async (e) => {
   e.preventDefault();
+  const titleInput = document.getElementById("titleInput");
+  if (titleInput.value.trim().length > MAX_TITLE_LENGTH) {
+    titleInput.classList.add("is-invalid");
+    updateCharCount();
+    titleInput.focus();
+    return;
+  }
+
   const btnSubmit = document.getElementById("btnAddTaskSubmit");
   if (tareaEnEdicion === null) {
     setFormLoading(true);
@@ -86,14 +94,13 @@ addTaskForm.addEventListener("submit", async (e) => {
   renderTasks();
 });
 
+// Evento que actualiza el conteo de caracteres con el input
 const input = document.getElementById("titleInput");
-input.addEventListener("keydown", () => {
-  updateCharCount();
-});
+input.addEventListener("input", updateCharCount);
 
-const btnAddTask = document
-  .getElementById("btnAddTask")
-  .onclick(() => updateCharCount());
+// Evento que actualiza el conteo de caracteres al abrir el modal
+const modal = document.getElementById("addTask");
+modal.addEventListener("show.bs.modal", updateCharCount);
 
 // Evento que renderiza las tareas cada vez que se recarga la página.
 document.addEventListener("DOMContentLoaded", () => {

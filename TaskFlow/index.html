@@ -107,7 +107,6 @@
       data-bs-backdrop="static"
       data-bs-keyboard="false"
     >
-      >
       <div class="modal-dialog modal-dialog-centered modal-md">
         <div class="modal-content">
           <div class="modal-header border-0">
@@ -119,7 +118,7 @@
             ></button>
           </div>
           <div class="modal-body">
-            <form id="addTaskForm">
+            <form id="addTaskForm" class="needs-validation" novalidate>
               <div class="mb-3">
                 <label class="form-label" for="titleInput"
                   >Título de la tarea</label
@@ -133,9 +132,18 @@
                   maxlength="150"
                   required
                 />
-                <small id="maxCharHelp" class="form-text text-muted"
-                  >0/150</small
-                >
+                <div class="d-flex justify-content-between">
+                  <div
+                    class="invalid-feedback d-block"
+                    id="titleError"
+                    style="visibility: hidden"
+                  >
+                    Supera el límite de 150 caracteres.
+                  </div>
+                  <small id="maxCharHelp" class="form-text text-muted ms-auto"
+                    >0/150</small
+                  >
+                </div>
               </div>
               <div class="mb-3">
                 <label class="form-label" for="descriptionInput"
