@@ -64,3 +64,7 @@ En el archivo **_database.sql_** se encuentran los comandos y query utilizados p
 - Eliminar al usuario 2. Primero verifico las transacciones donde este usuario existe. Luego lo elimino y vuelvo a verificar las transacciones.
 
 ![](../media/db_8.png)
+
+## ERD for table
+
+![](../media/db_9.jpeg)
