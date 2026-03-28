@@ -174,10 +174,6 @@ footer {
   align-items: center;
 }
 
-.form-check {
-  flex-grow: 1;
-}
-
 .form-check-label-complete {
   text-decoration: line-through 2px;
   text-decoration-color: var(--color-primario);

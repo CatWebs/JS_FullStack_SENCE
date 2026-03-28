@@ -28,16 +28,6 @@
         <a class="navbar-brand fw-semibold" href="./index.html">
           <i class="bi bi-clipboard2-check-fill me-1"></i> TaskFlow
         </a>
-        <ul class="nav nav-underline">
-          <li class="nav-item">
-            <a href="./index.html" class="nav-link active" aria-current="page"
-              >Inicio</a
-            >
-          </li>
-          <li class="nav-item">
-            <a href="./pages/api-content.html" class="nav-link">Consumo API</a>
-          </li>
-        </ul>
       </div>
     </header>
     <main class="container pt-5">
@@ -47,7 +37,7 @@
       >
         <h1 class="inter-title">Gestión de tareas</h1>
         <div class="action-buttons ms-auto mt-4 mt-md-0">
-          <button type="button" class="btn mb-1 btn-filtro fw-bold">
+          <button type="button" class="btn mb-1 btn-filtro fw-bold disabled">
             <!-- Próxima funcionalidad: Abrir un Modal con filtros. Las tareas serán filtradas por prioridad -->
             <i class="bi bi-filter"></i> Filtrar
           </button>
@@ -107,7 +97,6 @@
       data-bs-backdrop="static"
       data-bs-keyboard="false"
     >
-      >
       <div class="modal-dialog modal-dialog-centered modal-md">
         <div class="modal-content">
           <div class="modal-header border-0">
@@ -119,7 +108,7 @@
             ></button>
           </div>
           <div class="modal-body">
-            <form id="addTaskForm">
+            <form id="addTaskForm" class="needs-validation" novalidate>
               <div class="mb-3">
                 <label class="form-label" for="titleInput"
                   >Título de la tarea</label
@@ -129,8 +118,22 @@
                   type="text"
                   class="form-control"
                   placeholder="Título de la tarea"
+                  aria-describedby="maxCharHelp"
+                  maxlength="150"
                   required
                 />
+                <div class="d-flex justify-content-between">
+                  <div
+                    class="invalid-feedback d-block"
+                    id="titleError"
+                    style="visibility: hidden"
+                  >
+                    Supera el límite de 150 caracteres.
+                  </div>
+                  <small id="maxCharHelp" class="form-text text-muted ms-auto"
+                    >0/150</small
+                  >
+                </div>
               </div>
               <div class="mb-3">
                 <label class="form-label" for="descriptionInput"
